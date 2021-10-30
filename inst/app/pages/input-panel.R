@@ -15,20 +15,20 @@ fluidPage(
           inputId = "upload_matrix_file",
           label = "Matrix (mtx)",
         ),
+        tags$hr(),
         fileInput(
           inputId = "upload_feature_file",
           label = "Feature"
         ),
         fileInput(
-          inputId = "upload-cell-file",
-          label = "Cell",
-          accept = "csv"
+          inputId = "upload_cell_file",
+          label = "Cell"
         ),
         fileInput(
-          inputId = "upload-cell-type-file",
-          label = "Cell Type",
-          accept = "csv"
-        )
+          inputId = "upload_cell_type_file",
+          label = "Cell Type"
+        ),
+        uiOutput("create_seurat_object_submit_button")
       )
     ),
     column(
@@ -39,18 +39,12 @@ fluidPage(
         status = "primary",
         collapsible = FALSE,
         title = tagList(
-          "Data Preview"
+          "Matrix Preview"
         ),
-        tabsetPanel(
-          id = "upload-data-preview",
-          tabPanel(
-            title = "Matrix",
-            uiOutput("upload_data_preview_matrix")
-          ),
-          tabPanel(
-            title = "Feature",
-            uiOutput("upload_data_preview_feature")
-          )
+        id = "upload-data-preview",
+        tabPanel(
+          title = "Matrix",
+          uiOutput("upload_data_preview_matrix")
         )
       )
     )

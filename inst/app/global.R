@@ -26,7 +26,10 @@ global_data <- reactiveValues(
     ),
     collapse = "\n"
   ),
-  "upload_feature_file" = NULL
+  "upload_feature_file" = NULL,
+  "upload_cell_file" = NULL,
+  "upload_cell_type_file" = NULL,
+  "scRNA" = NULL
 )
 
 options(shiny.maxRequestSize = 1000 * 1024^2)

@@ -1,6 +1,5 @@
 output$upload_data_preview_matrix <- renderUI({
   tagList(
-    tags$br(),
     textOutput("upload_data_preview_matrix_description"),
     tags$hr(),
     callout(
