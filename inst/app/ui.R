@@ -11,10 +11,11 @@ shinyUI(
       sidebarMenu(
         id = "main-sidebar",
         menuItem(
-          text = "File upload",
+          text = "File Upload",
           tabName = "file-upload",
           icon = icon("upload")
         ),
+        menuItemOutput("show_quality_control"),
         menuItem(
           text = "Contact",
           tabName = "contact",
@@ -27,6 +28,10 @@ shinyUI(
         tabItem(
           tabName = "file-upload",
           source(file = "./pages/input-panel.R", local = TRUE)$value
+        ),
+        tabItem(
+          tabName = "quality-control",
+          source(file = "./pages/quality-control.R", local = TRUE)$value
         ),
         tabItem(
           tabName = "contact"
