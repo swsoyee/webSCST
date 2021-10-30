@@ -25,7 +25,8 @@ global_data <- reactiveValues(
       )
     ),
     collapse = "\n"
-  )
+  ),
+  "upload_feature_file" = NULL
 )
 
 options(shiny.maxRequestSize = 1000 * 1024^2)

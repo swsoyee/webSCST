@@ -16,9 +16,8 @@ fluidPage(
           label = "Matrix (mtx)",
         ),
         fileInput(
-          inputId = "upload-feature-file",
-          label = "Feature",
-          accept = ".csv"
+          inputId = "upload_feature_file",
+          label = "Feature"
         ),
         fileInput(
           inputId = "upload-cell-file",
@@ -47,6 +46,10 @@ fluidPage(
           tabPanel(
             title = "Matrix",
             uiOutput("upload_data_preview_matrix")
+          ),
+          tabPanel(
+            title = "Feature",
+            uiOutput("upload_data_preview_feature")
           )
         )
       )
