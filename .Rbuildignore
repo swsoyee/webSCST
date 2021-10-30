@@ -2,3 +2,4 @@
 ^renv\.lock$
 ^webSCST\.Rproj$
 ^\.Rproj\.user$
+^pipeline_st$
