@@ -34,7 +34,8 @@ global_data <- reactiveValues(
     "HBA1","HBA2","HBB","HBD","HBE1",
     "HBG1","HBG2","HBM","HBQ1","HBZ","ABC"
   ),
-  quality_control_process_done = FALSE
+  quality_control_process_done = FALSE,
+  "scRNA_filter_1" = NULL
 )
 
 options(shiny.maxRequestSize = 1000 * 1024^2)

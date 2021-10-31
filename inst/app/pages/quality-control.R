@@ -39,7 +39,7 @@ fluidPage(
         tags$br(),
         actionBttn(
           inputId = "apply_quality_control_filter",
-          label = "Submit",
+          label = "Apply Filter",
           color = "primary",
           icon = icon("play"),
           size = "sm",
