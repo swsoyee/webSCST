@@ -1,7 +1,7 @@
 Package: webSCST
 Version: 0.0.0.9000
 Title: What the Package Does (One Line, Title Case)
-Description: What the package does (one paragraph).
+Description: a web tool for single-cell RNA-seq data and spatial transcriptome data integration.
 Authors@R: person("First", "Last", , "first.last@example.com", c("aut", "cre"), comment = c(ORCID = "YOUR-ORCID-ID"))
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a license
 Encoding: UTF-8
