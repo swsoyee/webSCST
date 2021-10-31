@@ -9,7 +9,7 @@ shinyUI(
     ),
     sidebar = dashboardSidebar(
       sidebarMenu(
-        id = "main-sidebar",
+        id = "main_sidebar",
         menuItem(
           text = "File Upload",
           tabName = "file-upload",
@@ -30,7 +30,7 @@ shinyUI(
           source(file = "./pages/input-panel.R", local = TRUE)$value
         ),
         tabItem(
-          tabName = "quality-control",
+          tabName = "quality_control",
           source(file = "./pages/quality-control.R", local = TRUE)$value
         ),
         tabItem(

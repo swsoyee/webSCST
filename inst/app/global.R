@@ -29,7 +29,12 @@ global_data <- reactiveValues(
   "upload_feature_file" = NULL,
   "upload_cell_file" = NULL,
   "upload_cell_type_file" = NULL,
-  "scRNA" = NULL
+  "scRNA" = NULL,
+  "HBgenes" = c(
+    "HBA1","HBA2","HBB","HBD","HBE1",
+    "HBG1","HBG2","HBM","HBQ1","HBZ","ABC"
+  ),
+  quality_control_process_done = FALSE
 )
 
 options(shiny.maxRequestSize = 1000 * 1024^2)

@@ -3,7 +3,7 @@ output$show_quality_control <- renderUI({
   if (TRUE) {
     menuItem(
       text = "Quality Control",
-      tabName = "quality-control",
+      tabName = "quality_control",
       icon = icon("clipboard-check")
     )
   }
