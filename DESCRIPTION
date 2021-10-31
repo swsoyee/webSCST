@@ -2,9 +2,30 @@ Package: webSCST
 Version: 0.0.0.9000
 Title: What the Package Does (One Line, Title Case)
 Description: a web tool for single-cell RNA-seq data and spatial transcriptome data integration.
-Authors@R: person("First", "Last", , "first.last@example.com", c("aut", "cre"), comment = c(ORCID = "YOUR-ORCID-ID"))
+Authors@R:
+    c(person(given = "Wei",
+        family = "Su",
+        role = c("aut", "cre"),
+        email = "swsoyee@gmail.com",
+        comment = c(ORCID = "0000-0002-9302-5332")
+      ))
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a license
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Imports:
+    shiny,
+    bs4Dash,
+    shinyWidgets,
+    reactable,
+    shinycssloaders,
+    Seurat,
+    tidyverse,
+    Matrix,
+    data.table
+Suggests:
+    knitr,
+    rmarkdown
+Depends: 
+    R (>= 4.0.0)
