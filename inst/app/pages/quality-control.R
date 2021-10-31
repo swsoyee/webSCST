@@ -5,6 +5,10 @@ fluidPage(
       id = "violin_plot_and_feature_scatter",
       solidHeader = TRUE,
       status = "primary",
+      label = boxLabel(
+        "Step 1",
+        status = "white"
+      ),
       maximizable = TRUE,
       title = tagList(
         "Violin Plot and Feature Scatter"
@@ -69,6 +73,10 @@ fluidPage(
     box(
       id = "normailization_and_scaling",
       width = 12,
+      label = boxLabel(
+        "Step 2",
+        status = "white"
+      ),
       solidHeader = TRUE,
       collapsed = TRUE,
       maximizable = TRUE,
@@ -118,7 +126,39 @@ fluidPage(
           )
         )
       ),
-      uiOutput("normalization_plot_wrapper")
+      uiOutput("normalization_plot_wrapper"),
+      uiOutput("go_to_quality_control_clustering")
+    )
+  ),
+  fluidRow(
+    tabBox(
+      id = "clustering",
+      width = 12,
+      title = tagList(
+        "Clustering"
+      ),
+      side = "right",
+      label = boxLabel(
+        "Step 3",
+        status = "white"
+      ),
+      solidHeader = TRUE,
+      collapsed = TRUE,
+      maximizable = TRUE,
+      status = "primary",
+      type = "tabs",
+      tabPanel(
+        title = "PCA",
+        withSpinner(plotOutput("clustering_pca"))
+      ),
+      tabPanel(
+        title = "t-SNE",
+        withSpinner(plotOutput("clustering_tsne"))
+      ),
+      tabPanel(
+        title = "UMAP",
+        withSpinner(plotOutput("clustering_umap"))
+      )
     )
   )
 )

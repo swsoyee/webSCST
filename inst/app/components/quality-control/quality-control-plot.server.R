@@ -108,7 +108,7 @@ output$normalization_plot <- renderPlot({
         size = 2.5
       )
 
-      scale.genes <-  rownames(scRNA)
+      scale.genes <- rownames(scRNA)
       scRNA <- ScaleData(scRNA, features = scale.genes)
       global_data$scRNA_filter_1 <- scRNA
       plot1 + plot2 + plot_layout(ncol = 2) & theme(legend.position = "bottom")
@@ -122,4 +122,89 @@ output$normalization_plot_wrapper <- renderUI({
   } else {
     withSpinner(plotOutput("normalization_plot"))
   }
+})
+
+observeEvent(input$apply_quality_control_normalize, {
+  output$go_to_quality_control_clustering <- renderUI({
+    actionBttn(
+      inputId = "go_to_quality_control_clustering",
+      label = "Go to Clustering",
+      color = "primary",
+      icon = icon("play"),
+      size = "sm",
+      style = "fill",
+      block = TRUE
+    )
+  })
+})
+
+observeEvent(input$go_to_quality_control_clustering, {
+  updateBox(
+    id = "normailization_and_scaling",
+    action = "toggle"
+  )
+  updateBox(
+    id = "clustering_box",
+    action = "toggle"
+  )
+})
+
+output$clustering_pca <- renderPlot({
+  if (input$go_to_quality_control_clustering == 0) {
+    return()
+  }
+  isolate({
+    if (global_data$quality_control_process_done) {
+      scRNA <- global_data$scRNA_filter_1
+
+      scRNA <- RunPCA(scRNA, features = VariableFeatures(scRNA))
+      plot1 <- DimPlot(scRNA, reduction = "pca", group.by = "orig.ident")
+      plot2 <- ElbowPlot(scRNA, ndims = 20, reduction = "pca")
+      global_data$scRNA_filter_1 <- scRNA
+
+      plot1 + plot2
+    }
+  })
+})
+
+output$clustering_tsne <- renderPlot({
+  if (input$go_to_quality_control_clustering == 0) {
+    return()
+  }
+  isolate({
+    if (global_data$quality_control_process_done) {
+      pc.num=1:15
+      scRNA <- global_data$scRNA_filter_1
+
+      scRNA <- FindNeighbors(scRNA, dims = pc.num)
+      scRNA <- FindClusters(scRNA, resolution = 0.5)
+
+      metadata <- scRNA@meta.data
+      cell_cluster <- data.frame(
+        cell_ID=rownames(metadata),
+        cluster_ID=metadata$seurat_clusters
+      )
+
+      scRNA <- RunTSNE(scRNA, dims = pc.num)
+      global_data$scRNA_filter_1 <- scRNA
+
+      DimPlot(scRNA, reduction = "tsne", label=T)
+    }
+  })
+})
+
+output$clustering_umap <- renderPlot({
+  if (input$go_to_quality_control_clustering == 0) {
+    return()
+  }
+  isolate({
+    if (global_data$quality_control_process_done) {
+      scRNA <- global_data$scRNA_filter_1
+
+      scRNA <- RunUMAP(scRNA, dims = pc.num)
+      global_data$scRNA_filter_1 <- scRNA
+
+      DimPlot(scRNA, reduction = "umap", label=T)
+    }
+  })
 })
