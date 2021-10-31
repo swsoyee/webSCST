@@ -58,9 +58,68 @@ output$quality_control_feature_scatter <- renderPlot({
 
 output$quality_control_plot_description <- renderText({
   # it will take too much time when using `all.equal` to do the comparison
-  if (object.size( global_data$scRNA_filter_1) == object.size( global_data$scRNA)) {
+  if (object.size(global_data$scRNA_filter_1) == object.size(global_data$scRNA)) {
     return("The figures of the raw data results are shown below:")
   } else {
     return("The figures of the filtered data results are shown below:")
+  }
+})
+
+observeEvent(input$go_to_quality_control_normalization, {
+  updateBox(
+    id = "normailization_and_scaling",
+    action = "toggle"
+  )
+  updateBox(
+    id = "violin_plot_and_feature_scatter",
+    action = "toggle"
+  )
+})
+
+output$normalization_plot <- renderPlot({
+  if (input$apply_quality_control_normalize == 0) {
+    return()
+  }
+  isolate({
+    if (global_data$quality_control_process_done) {
+      scRNA <- global_data$scRNA_filter_1
+
+      scRNA <- NormalizeData(
+        scRNA,
+        normalization.method = "LogNormalize",
+        scale.factor = input$normalize_scale_factor
+      )
+
+      scRNA <- FindVariableFeatures(
+        scRNA,
+        selection.method = "vst",
+        nfeatures = input$features_count
+      )
+
+      top <- head(
+        VariableFeatures(scRNA),
+        input$top_gene_count
+      )
+      plot1 <- VariableFeaturePlot(scRNA)
+      plot2 <- LabelPoints(
+        plot = plot1,
+        points = top,
+        repel = TRUE,
+        size = 2.5
+      )
+
+      scale.genes <-  rownames(scRNA)
+      scRNA <- ScaleData(scRNA, features = scale.genes)
+      global_data$scRNA_filter_1 <- scRNA
+      plot1 + plot2 + plot_layout(ncol = 2) & theme(legend.position = "bottom")
+    }
+  })
+})
+
+output$normalization_plot_wrapper <- renderUI({
+  if (input$apply_quality_control_normalize == 0) {
+    return()
+  } else {
+    withSpinner(plotOutput("normalization_plot"))
   }
 })
