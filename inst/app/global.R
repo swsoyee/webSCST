@@ -10,6 +10,7 @@ library(Seurat)
 library(tidyverse)
 library(Matrix)
 library(data.table)
+library(patchwork)
 
 global_data <- reactiveValues(
   "upload_matrix_file" = NULL,

@@ -173,7 +173,7 @@ output$clustering_tsne <- renderPlot({
   }
   isolate({
     if (global_data$quality_control_process_done) {
-      pc.num=1:15
+      pc.num <- 1:15
       scRNA <- global_data$scRNA_filter_1
 
       scRNA <- FindNeighbors(scRNA, dims = pc.num)
@@ -181,14 +181,14 @@ output$clustering_tsne <- renderPlot({
 
       metadata <- scRNA@meta.data
       cell_cluster <- data.frame(
-        cell_ID=rownames(metadata),
-        cluster_ID=metadata$seurat_clusters
+        cell_ID = rownames(metadata),
+        cluster_ID = metadata$seurat_clusters
       )
 
       scRNA <- RunTSNE(scRNA, dims = pc.num)
       global_data$scRNA_filter_1 <- scRNA
 
-      DimPlot(scRNA, reduction = "tsne", label=T)
+      DimPlot(scRNA, reduction = "tsne", label = T)
     }
   })
 })
@@ -199,12 +199,13 @@ output$clustering_umap <- renderPlot({
   }
   isolate({
     if (global_data$quality_control_process_done) {
+      pc.num <- 1:15
       scRNA <- global_data$scRNA_filter_1
 
       scRNA <- RunUMAP(scRNA, dims = pc.num)
       global_data$scRNA_filter_1 <- scRNA
 
-      DimPlot(scRNA, reduction = "umap", label=T)
+      DimPlot(scRNA, reduction = "umap", label = T)
     }
   })
 })
