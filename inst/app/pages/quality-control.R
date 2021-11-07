@@ -160,5 +160,43 @@ fluidPage(
         withSpinner(plotOutput("clustering_umap"))
       )
     )
+  ),
+  fluidRow(
+    box(
+      width = 12,
+      solidHeader = TRUE,
+      status = "primary",
+      label = boxLabel(
+        "Step 4",
+        status = "white"
+      ),
+      title = tagList(
+        "Export Data"
+      ),
+      fluidRow(
+        column(
+          width = 6,
+          downloadBttn(
+            outputId = "save_object_as_rds",
+            label = "Save Clean Dataset",
+            color = "primary",
+            size = "sm",
+            style = "fill",
+            block = TRUE
+          )
+        ),
+        column(
+          width = 6,
+          downloadBttn(
+            outputId = "find_marker_and_save",
+            label = "Find Markers and Save",
+            color = "primary",
+            size = "sm",
+            style = "fill",
+            block = TRUE
+          )
+        )
+      )
+    )
   )
 )

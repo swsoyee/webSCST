@@ -209,3 +209,60 @@ output$clustering_umap <- renderPlot({
     }
   })
 })
+
+output$save_object_as_rds <- downloadHandler(
+  filename = function() {
+    paste("scRNA_", Sys.Date(), ".rds", sep = "")
+  },
+  content = function(con) {
+    progressSweetAlert(
+      session = session,
+      id = "create-seurat-object-to-rds",
+      title = "Generating Dataset...",
+      display_pct = TRUE,
+      value = 15,
+    )
+    saveRDS(global_data$scRNA_filter_1, con)
+    progressSweetAlert(
+      session = session,
+      id = "create-seurat-object-to-rds",
+      title = "Done",
+      display_pct = TRUE,
+      value = 100,
+    )
+    Sys.sleep(1)
+    closeSweetAlert(session = session)
+  }
+)
+
+output$find_marker_and_save <- downloadHandler(
+  filename = function() {
+    paste("Markers_", Sys.Date(), ".rds", sep = "")
+  },
+  content = function(con) {
+    scRNA <- global_data$scRNA_filter_1
+    progressSweetAlert(
+      session = session,
+      id = "create-seurat-object-to-rds",
+      title = "Finding markers...",
+      display_pct = TRUE,
+      value = 15,
+    )
+    Idents(scRNA) <- scRNA$cell_type
+    sc.marker <- FindAllMarkers(scRNA, only.pos = TRUE, min.pct = 0.25)
+    saveRDS(sc.marker, con)
+
+    global_data$marker <- sc.marker
+    global_data$scRNA_filter_1 <- scRNA
+
+    progressSweetAlert(
+      session = session,
+      id = "create-seurat-object-to-rds",
+      title = "Done",
+      display_pct = TRUE,
+      value = 100,
+    )
+    Sys.sleep(1)
+    closeSweetAlert(session = session)
+  }
+)
