@@ -12,6 +12,7 @@ output$upload_data_preview_matrix <- renderUI({
 })
 
 observeEvent(input$loading_sample_data, {
+  # TODO the path of demo dataset should be fix later
   closeAlert(id = "upload_file_alert")
 
   progressSweetAlert(
