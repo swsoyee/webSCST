@@ -11,6 +11,66 @@ output$upload_data_preview_matrix <- renderUI({
   )
 })
 
+observeEvent(input$loading_sample_data, {
+  closeAlert(id = "upload_file_alert")
+
+  progressSweetAlert(
+    session = session,
+    id = "loading-demo",
+    title = "Loading MTX file",
+    display_pct = TRUE,
+    value = 10,
+  )
+  global_data$upload_matrix_file <- readMM("../../pipeline_st/input/matrix_example.mtx")
+  out <- capture.output(
+    str(global_data$upload_matrix_file)
+  )
+  out_with_newline <- paste(out, collapse = "\n")
+  global_data$matrix_preview <- out_with_newline
+
+  updateProgressBar(
+    session = session,
+    id = "loading-demo",
+    title = "Loading features file",
+    value = 50
+  )
+  global_data$upload_feature_file <- fread(
+    "../../pipeline_st/input/features.tsv",
+    header = FALSE
+  )[[1]]
+
+  updateProgressBar(
+    session = session,
+    id = "loading-demo",
+    title = "Loading cell file",
+    value = 60
+  )
+  global_data$upload_cell_file <- fread(
+    "../../pipeline_st/input/cell.tsv",
+    header = FALSE
+  )[[1]]
+
+  updateProgressBar(
+    session = session,
+    id = "loading-demo",
+    title = "Loading cell type file",
+    value = 90
+  )
+  global_data$upload_cell_type_file <- fread(
+    "../../pipeline_st/input/cell_type.txt",
+    header = FALSE
+  )[[1]]
+
+  updateProgressBar(
+    session = session,
+    id = "loading-demo",
+    title = "Loading finished",
+    value = 100
+  )
+  Sys.sleep(1)
+  closeSweetAlert(session = session)
+})
+
 output$upload_data_preview_matrix_description <- renderText({
   if (is.null(global_data$upload_matrix_file)) {
     return("Please upload your matrix file first. A matrix file has the following structure:")

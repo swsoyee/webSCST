@@ -9,6 +9,15 @@ fluidPage(
       title = tagList(
         "File Upload"
       ),
+      actionBttn(
+        inputId = "loading_sample_data",
+        label = "Load Demo",
+        color = "primary",
+        icon = icon("play"),
+        size = "sm",
+        style = "fill",
+        block = "TRUE"
+      ),
       fileInput(
         inputId = "upload_matrix_file",
         label = "Matrix (mtx)",
