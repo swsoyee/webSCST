@@ -17,6 +17,11 @@ shinyUI(
         ),
         menuItemOutput("show_quality_control"),
         menuItem(
+          text = "Data Integration",
+          tabName = "data-integration",
+          icon = icon("upload")
+        ),
+        menuItem(
           text = "Contact",
           tabName = "contact",
           icon = icon("envelope")
@@ -32,6 +37,10 @@ shinyUI(
         tabItem(
           tabName = "quality_control",
           source(file = "./pages/quality-control.R", local = TRUE)$value
+        ),
+        tabItem(
+          tabName = "data-integration",
+          source(file = "./pages/data-integration.R", local = TRUE)$value
         ),
         tabItem(
           tabName = "contact"

@@ -37,7 +37,8 @@ global_data <- reactiveValues(
   ),
   quality_control_process_done = FALSE,
   "scRNA_filter_1" = NULL,
-  "marker" = NULL
+  "marker" = NULL,
+  "position_sub_sub" = NULL
 )
 
-options(shiny.maxRequestSize = 1000 * 1024^2)
+options(shiny.maxRequestSize = 4000 * 1024^2)
