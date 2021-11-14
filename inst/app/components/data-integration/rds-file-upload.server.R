@@ -24,6 +24,8 @@ observeEvent(input$submit_rds_file, {
   )
   load("./db/position.Rds")
   global_data$position_sub_sub <- position_sub_sub
+  load("./db/stRNA.rds")
+  global_data$stRNA <- stRNA
   updateProgressBar(
     session = session,
     id = "loading-rds",

@@ -23,7 +23,8 @@ Imports:
     Seurat,
     tidyverse,
     Matrix,
-    data.table
+    data.table,
+    ggpubr
 Suggests:
     knitr,
     rmarkdown

@@ -11,6 +11,7 @@ library(tidyverse)
 library(Matrix)
 library(data.table)
 library(patchwork)
+library(ggpubr)
 
 global_data <- reactiveValues(
   "upload_matrix_file" = NULL,
@@ -38,7 +39,8 @@ global_data <- reactiveValues(
   quality_control_process_done = FALSE,
   "scRNA_filter_1" = NULL,
   "marker" = NULL,
-  "position_sub_sub" = NULL
+  "position_sub_sub" = NULL,
+  "stRNA" = NULL
 )
 
 options(shiny.maxRequestSize = 4000 * 1024^2)
