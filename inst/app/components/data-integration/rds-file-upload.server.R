@@ -15,6 +15,7 @@ observeEvent(input$submit_rds_file, {
     value = 50
   )
   global_data$marker <- readRDS(input$upload_markers_file$datapath)
+  global_data$st_marker <- readRDS("./db/st_marker.Rds")
 
   updateProgressBar(
     session = session,

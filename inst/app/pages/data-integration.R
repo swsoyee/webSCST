@@ -67,6 +67,17 @@ fluidPage(
           ),
           tabPanel(
             title = "Distribution of spatial cell populations in single cells",
+            uiOutput("cell_type_selector_scrna"),
+            fluidRow(
+              column(
+                width = 6,
+                plotOutput("selected_cell_type_scrna_violin")
+              ),
+              column(
+                width = 6,
+                plotOutput("selected_cell_type_scrna_featureplot")
+              )
+            )
           )
         ),
       ),
