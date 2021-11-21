@@ -85,7 +85,10 @@ fluidPage(
         title = "Multimodal intersection analysis (MIA)"
       ),
       tabPanel(
-        title = "ssGSEA"
+        title = "ssGSEA",
+        uiOutput("run_gsva"),
+        uiOutput("cell_type_selector_gsva"),
+        plotOutput("selected_cell_type_gsva_featureplot")
       )
     )
   )

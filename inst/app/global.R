@@ -12,6 +12,8 @@ library(Matrix)
 library(data.table)
 library(patchwork)
 library(ggpubr)
+suppressPackageStartupMessages(library(tidyHeatmap))
+library(GSVA)
 
 global_data <- reactiveValues(
   "upload_matrix_file" = NULL,
@@ -41,7 +43,9 @@ global_data <- reactiveValues(
   "marker" = NULL,
   "st_marker" = NULL,
   "position_sub_sub" = NULL,
-  "stRNA" = NULL
+  "stRNA" = NULL,
+  "gsva_done" = FALSE,
+  "gsva_stRNA" = NULL
 )
 
 options(shiny.maxRequestSize = 4000 * 1024^2)
