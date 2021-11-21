@@ -25,7 +25,8 @@ Imports:
     Matrix,
     data.table,
     ggpubr,
-    GSVA
+    GSVA,
+    tidyHeatmap
 Suggests:
     knitr,
     rmarkdown
