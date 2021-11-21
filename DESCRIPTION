@@ -24,7 +24,8 @@ Imports:
     tidyverse,
     Matrix,
     data.table,
-    ggpubr
+    ggpubr,
+    GSVA
 Suggests:
     knitr,
     rmarkdown
