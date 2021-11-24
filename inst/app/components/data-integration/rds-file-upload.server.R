@@ -33,6 +33,4 @@ observeEvent(input$submit_rds_file, {
     title = "Loading finished.",
     value = 100
   )
-  Sys.sleep(1)
-  closeSweetAlert(session = session)
 })
