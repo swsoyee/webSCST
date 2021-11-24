@@ -46,8 +46,13 @@ observeEvent(input$create_seurat_object, {
     title = "Finish building dataset",
     value = 100
   )
-  Sys.sleep(1)
-  closeSweetAlert(session = session)
+  
+  show_alert(
+    session = session,
+    title = "Submit finished",
+    text = "Go to Quality Control tab to proceed data.",
+    type = "success"
+  )
 })
 
 observeEvent(input$upload_feature_file, {
