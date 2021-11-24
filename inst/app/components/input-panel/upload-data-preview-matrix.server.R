@@ -12,7 +12,6 @@ output$upload_data_preview_matrix <- renderUI({
 })
 
 observeEvent(input$loading_sample_data, {
-  # TODO the path of demo dataset should be fix later
   closeAlert(id = "upload_file_alert")
 
   progressSweetAlert(
@@ -22,7 +21,7 @@ observeEvent(input$loading_sample_data, {
     display_pct = TRUE,
     value = 10,
   )
-  global_data$upload_matrix_file <- readMM("../../pipeline_st/input/matrix_example.mtx")
+  global_data$upload_matrix_file <- readMM("./db/matrix_example.mtx")
   out <- capture.output(
     str(global_data$upload_matrix_file)
   )
@@ -36,7 +35,7 @@ observeEvent(input$loading_sample_data, {
     value = 50
   )
   global_data$upload_feature_file <- fread(
-    "../../pipeline_st/input/features.tsv",
+    "./db/features.tsv",
     header = FALSE
   )[[1]]
 
@@ -47,7 +46,7 @@ observeEvent(input$loading_sample_data, {
     value = 60
   )
   global_data$upload_cell_file <- fread(
-    "../../pipeline_st/input/cell.tsv",
+    "./db/cell.tsv",
     header = FALSE
   )[[1]]
 
@@ -58,7 +57,7 @@ observeEvent(input$loading_sample_data, {
     value = 90
   )
   global_data$upload_cell_type_file <- fread(
-    "../../pipeline_st/input/cell_type.txt",
+    "./db/cell_type.txt",
     header = FALSE
   )[[1]]
 
