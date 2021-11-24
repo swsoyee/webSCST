@@ -26,7 +26,8 @@ Imports:
     data.table,
     ggpubr,
     GSVA,
-    tidyHeatmap
+    tidyHeatmap,
+    patchwork
 Suggests:
     knitr,
     rmarkdown
