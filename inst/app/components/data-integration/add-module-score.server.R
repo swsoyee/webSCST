@@ -111,12 +111,14 @@ observeEvent(input$selected_cell_type_scrna, {
       }
       if (input$selected_cell_type_scrna_featureplot_cluster_method == "tsne") {
         pc.num <- 1:15
+        Idents(scRNA) <- scRNA$cell_type
         scRNA <- FindNeighbors(scRNA, dims = pc.num)
         scRNA <- FindClusters(scRNA, resolution = 0.5)
         scRNA <- RunTSNE(scRNA, dims = pc.num)
       }
       if (input$selected_cell_type_scrna_featureplot_cluster_method == "umap") {
         pc.num <- 1:15
+        Idents(scRNA) <- scRNA$cell_type
         scRNA <- RunUMAP(scRNA, dims = pc.num)
       }
       # TODO ===
