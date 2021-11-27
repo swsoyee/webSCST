@@ -21,7 +21,7 @@ observeEvent(input$loading_sample_data, {
     display_pct = TRUE,
     value = 10,
   )
-  global_data$upload_matrix_file <- readMM("./db/matrix_example.mtx")
+  global_data$upload_matrix_file <- readMM("./db/count_example.mtx")
   out <- capture.output(
     str(global_data$upload_matrix_file)
   )
@@ -35,7 +35,7 @@ observeEvent(input$loading_sample_data, {
     value = 50
   )
   global_data$upload_feature_file <- fread(
-    "./db/features.tsv",
+    "./db/features_example.tsv",
     header = FALSE
   )[[1]]
 
@@ -46,7 +46,7 @@ observeEvent(input$loading_sample_data, {
     value = 60
   )
   global_data$upload_cell_file <- fread(
-    "./db/cell.tsv",
+    "./db/cell_example.tsv",
     header = FALSE
   )[[1]]
 
@@ -57,7 +57,8 @@ observeEvent(input$loading_sample_data, {
     value = 90
   )
   global_data$upload_cell_type_file <- fread(
-    "./db/cell_type.txt",
+    "./db/cell_type_example.txt",
+    fill = TRUE,
     header = FALSE
   )[[1]]
 

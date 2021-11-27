@@ -181,6 +181,7 @@ observeEvent(input$upload_cell_type_file, {
   )
   global_data$upload_cell_type_file <- fread(
     file$datapath,
+    fill = TRUE,
     header = FALSE
   )[[1]]
   updateProgressBar(
