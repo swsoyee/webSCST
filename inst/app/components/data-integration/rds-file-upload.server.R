@@ -26,6 +26,15 @@ observeEvent(input$submit_rds_file, {
   load("./db/position.Rds")
   global_data$position_sub_sub <- position_sub_sub
   load("./db/stRNA.rds")
+
+  embed_umap2 <- data.frame(
+    UMAP_1 = position_sub_sub$x,
+    UMAP_2 = position_sub_sub$y,
+    row.names = rownames(position_sub_sub)
+  )
+
+  stRNA@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
+
   global_data$stRNA <- stRNA
   updateProgressBar(
     session = session,
