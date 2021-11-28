@@ -171,9 +171,11 @@ output$clustering_tsne <- renderPlot({
   if (input$go_to_quality_control_clustering == 0) {
     return()
   }
+
+  pc.num <- 1:input$tsne_pc_num
+
   isolate({
     if (global_data$quality_control_process_done) {
-      pc.num <- 1:15
       scRNA <- global_data$scRNA_filter_1
 
       scRNA <- FindNeighbors(scRNA, dims = pc.num)
@@ -198,9 +200,11 @@ output$clustering_umap <- renderPlot({
   if (input$go_to_quality_control_clustering == 0) {
     return()
   }
+
+  pc.num <- 1:input$umap_pc_num
+
   isolate({
     if (global_data$quality_control_process_done) {
-      pc.num <- 1:15
       scRNA <- global_data$scRNA_filter_1
 
       Idents(scRNA) <- scRNA$cell_type

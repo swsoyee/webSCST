@@ -153,10 +153,24 @@ fluidPage(
       ),
       tabPanel(
         title = "t-SNE",
+        sliderInput(
+          inputId = "tsne_pc_num",
+          label = "PC Number",
+          min = 1,
+          max = 30,
+          value = 15
+        ),
         withSpinner(plotOutput("clustering_tsne"))
       ),
       tabPanel(
         title = "UMAP",
+        sliderInput(
+          inputId = "umap_pc_num",
+          label = "PC Number",
+          min = 2,
+          max = 30,
+          value = 15
+        ),
         withSpinner(plotOutput("clustering_umap"))
       )
     )
