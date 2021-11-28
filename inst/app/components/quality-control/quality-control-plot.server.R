@@ -176,9 +176,27 @@ output$clustering_tsne <- renderPlot({
 
   isolate({
     if (global_data$quality_control_process_done) {
+      progressSweetAlert(
+        session = session,
+        id = "calculating-tsne",
+        title = "Generating plot...",
+        display_pct = TRUE,
+        value = 10,
+      )
       scRNA <- global_data$scRNA_filter_1
-
+      updateProgressBar(
+        session = session,
+        id = "calculating-tsne",
+        title = "Finding Neighbors...",
+        value = 80
+      )
       scRNA <- FindNeighbors(scRNA, dims = pc.num)
+      updateProgressBar(
+        session = session,
+        id = "calculating-tsne",
+        title = "Finding Cluster...",
+        value = 80
+      )
       scRNA <- FindClusters(scRNA, resolution = 0.5)
 
       metadata <- scRNA@meta.data
@@ -191,6 +209,7 @@ output$clustering_tsne <- renderPlot({
       scRNA <- RunTSNE(scRNA, dims = pc.num)
       global_data$scRNA_filter_1 <- scRNA
 
+      closeSweetAlert(session = session)
       DimPlot(scRNA, reduction = "tsne", label = T)
     }
   })
@@ -207,10 +226,24 @@ output$clustering_umap <- renderPlot({
     if (global_data$quality_control_process_done) {
       scRNA <- global_data$scRNA_filter_1
 
+      progressSweetAlert(
+        session = session,
+        id = "calculating-umap",
+        title = "Runing UMAP...",
+        display_pct = TRUE,
+        value = 10,
+      )
       Idents(scRNA) <- scRNA$cell_type
+      updateProgressBar(
+        session = session,
+        id = "calculating-umap",
+        title = "Runing UMAP...",
+        value = 50
+      )
       scRNA <- RunUMAP(scRNA, dims = pc.num)
       global_data$scRNA_filter_1 <- scRNA
 
+      closeSweetAlert(session = session)
       DimPlot(scRNA, reduction = "umap", label = T)
     }
   })
