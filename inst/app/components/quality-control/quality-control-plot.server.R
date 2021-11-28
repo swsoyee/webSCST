@@ -185,6 +185,7 @@ output$clustering_tsne <- renderPlot({
         cluster_ID = metadata$seurat_clusters
       )
 
+      Idents(scRNA) <- scRNA$cell_type
       scRNA <- RunTSNE(scRNA, dims = pc.num)
       global_data$scRNA_filter_1 <- scRNA
 
@@ -202,6 +203,7 @@ output$clustering_umap <- renderPlot({
       pc.num <- 1:15
       scRNA <- global_data$scRNA_filter_1
 
+      Idents(scRNA) <- scRNA$cell_type
       scRNA <- RunUMAP(scRNA, dims = pc.num)
       global_data$scRNA_filter_1 <- scRNA
 
