@@ -60,19 +60,28 @@ observeEvent(input$selected_cell_type_strna, {
 
     score_list <- list(gene = top10$gene)
 
-    stRNA <- AddModuleScore(stRNA, features = score_list, name = input$selected_cell_type_strna)
+    stRNA <- suppressWarnings( # if there is space in the name, it will convert the space to dot
+      AddModuleScore(
+        stRNA,
+        features = score_list,
+        name = input$selected_cell_type_strna
+      )
+    )
+
+    name <- gsub(" ", ".", input$selected_cell_type_strna)
+    feature_name <- paste0(name, "1")
 
     output$selected_cell_type_strna_violin <- renderPlot({
       ggviolin(
         data = stRNA@meta.data,
         x = "SCT_snn_res.0.8",
-        y = paste0(input$selected_cell_type_strna, "1"),
+        y = feature_name,
         fill = "SCT_snn_res.0.8"
       )
     })
 
     output$selected_cell_type_strna_featureplot <- renderPlot({
-      FeaturePlot(stRNA, features = paste0(input$selected_cell_type_strna, "1"))
+      FeaturePlot(stRNA, features = feature_name)
     })
   }
 })
