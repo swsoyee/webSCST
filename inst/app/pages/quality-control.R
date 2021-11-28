@@ -1,7 +1,7 @@
 fluidPage(
   fluidRow(
     box(
-      width = 12,
+      width = 10,
       id = "violin_plot_and_feature_scatter",
       solidHeader = TRUE,
       status = "primary",
