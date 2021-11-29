@@ -172,7 +172,7 @@ output$clustering_tsne <- renderPlot({
     return()
   }
 
-  pc.num <- 1:input$tsne_pc_num
+  pc.num <- 1:input$pc_num
 
   isolate({
     if (global_data$quality_control_process_done) {
@@ -220,7 +220,7 @@ output$clustering_umap <- renderPlot({
     return()
   }
 
-  pc.num <- 1:input$umap_pc_num
+  pc.num <- 1:input$pc_num
 
   isolate({
     if (global_data$quality_control_process_done) {

@@ -131,13 +131,12 @@ fluidPage(
     )
   ),
   fluidRow(
-    tabBox(
+    box(
       id = "clustering",
       width = 12,
       title = tagList(
         "Clustering"
       ),
-      side = "right",
       label = boxLabel(
         "Step 3",
         status = "white"
@@ -146,32 +145,23 @@ fluidPage(
       collapsed = TRUE,
       maximizable = TRUE,
       status = "primary",
-      type = "tabs",
-      tabPanel(
-        title = "PCA",
-        withSpinner(plotOutput("clustering_pca"))
+      withSpinner(plotOutput("clustering_pca")),
+      sliderInput(
+        inputId = "pc_num",
+        label = "PC Number",
+        min = 1,
+        max = 30,
+        value = 15
       ),
-      tabPanel(
-        title = "t-SNE",
-        sliderInput(
-          inputId = "tsne_pc_num",
-          label = "PC Number",
-          min = 1,
-          max = 30,
-          value = 15
+      fluidRow(
+        column(
+          width = 6,
+          withSpinner(plotOutput("clustering_tsne"))
         ),
-        withSpinner(plotOutput("clustering_tsne"))
-      ),
-      tabPanel(
-        title = "UMAP",
-        sliderInput(
-          inputId = "umap_pc_num",
-          label = "PC Number",
-          min = 2,
-          max = 30,
-          value = 15
-        ),
-        withSpinner(plotOutput("clustering_umap"))
+        column(
+          width = 6,
+          withSpinner(plotOutput("clustering_umap"))
+        )
       )
     )
   ),
