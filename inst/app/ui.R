@@ -22,8 +22,8 @@ shinyUI(
           icon = icon("upload")
         ),
         menuItem(
-          text = "Contact",
-          tabName = "contact",
+          text = "About",
+          tabName = "about",
           icon = icon("envelope")
         )
       ),
