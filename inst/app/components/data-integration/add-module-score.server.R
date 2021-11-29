@@ -25,16 +25,7 @@ output$cell_type_selector_scrna <- renderUI({
         )
       ),
       column(
-        width = 6,
-        pickerInput(
-          inputId = "selected_cell_type_scrna_featureplot_cluster_method",
-          label = "Clustering Method",
-          choices = list(
-            "PCA" = "pca",
-            "t-SNE" = "tsne",
-            "UMAP" = "umap"
-          )
-        )
+        width = 6
       )
     )
   } else {
@@ -102,39 +93,54 @@ observeEvent(input$selected_cell_type_scrna, {
 
     score_list <- list(gene = top50$gene)
 
-    scRNA <- AddModuleScore(scRNA, features = score_list, name = input$selected_cell_type_scrna)
+    progressSweetAlert(
+      session = session,
+      id = "distribution-of-spatial-cell-populations-in-single-cells",
+      title = "Adding module score...",
+      display_pct = TRUE,
+      value = 10,
+    )
+    scRNA <- AddModuleScore(scRNA, features = score_list, name = "ST_cluster")
 
     output$selected_cell_type_scrna_violin <- renderPlot({
       ggviolin(
         data = scRNA@meta.data,
         x = "cell_type",
-        y = paste0(input$selected_cell_type_scrna, "1"),
+        y = "ST_cluster1",
         fill = "cell_type"
-      )
+      ) +
+        theme(
+          axis.text.x = element_text(
+            angle = 90,
+            hjust = 1,
+            vjust = 0
+          ),
+          legend.position = "none"
+        )
     })
 
     output$selected_cell_type_scrna_featureplot <- renderPlot({
-      # TODO === before FeaturePlot, something is missing
-      if (input$selected_cell_type_scrna_featureplot_cluster_method == "pca") {
-        scRNA <- RunPCA(scRNA, features = VariableFeatures(scRNA))
-      }
-      if (input$selected_cell_type_scrna_featureplot_cluster_method == "tsne") {
-        pc.num <- 1:15
-        Idents(scRNA) <- scRNA$cell_type
-        scRNA <- FindNeighbors(scRNA, dims = pc.num)
-        scRNA <- FindClusters(scRNA, resolution = 0.5)
-        scRNA <- RunTSNE(scRNA, dims = pc.num)
-      }
-      if (input$selected_cell_type_scrna_featureplot_cluster_method == "umap") {
-        pc.num <- 1:15
-        Idents(scRNA) <- scRNA$cell_type
-        scRNA <- RunUMAP(scRNA, dims = pc.num)
-      }
-      # TODO ===
+      updateProgressBar(
+        session = session,
+        id = "distribution-of-spatial-cell-populations-in-single-cells",
+        title = "Runing PCA...",
+        value = 50
+      )
+      scRNA <- RunPCA(scRNA, features = VariableFeatures(scRNA))
+      pc.num <- 1:15
+      Idents(scRNA) <- scRNA$cell_type
+      updateProgressBar(
+        session = session,
+        id = "distribution-of-spatial-cell-populations-in-single-cells",
+        title = "Runing UMAP...",
+        value = 50
+      )
+      scRNA <- RunUMAP(scRNA, dims = pc.num)
 
+      closeSweetAlert(session = session)
       FeaturePlot(
         scRNA,
-        features = paste0(input$selected_cell_type_scrna, "1"),
+        features = "ST_cluster1",
         label = TRUE
       )
     })
