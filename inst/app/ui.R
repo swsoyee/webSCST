@@ -22,8 +22,8 @@ shinyUI(
           icon = icon("upload")
         ),
         menuItem(
-          text = "Contact",
-          tabName = "contact",
+          text = "About",
+          tabName = "about",
           icon = icon("envelope")
         )
       ),
@@ -43,7 +43,7 @@ shinyUI(
           source(file = "./pages/data-integration.R", local = TRUE)$value
         ),
         tabItem(
-          tabName = "contact"
+          tabName = "about"
         )
       )
     ),
