@@ -43,7 +43,7 @@ shinyUI(
           source(file = "./pages/data-integration.R", local = TRUE)$value
         ),
         tabItem(
-          tabName = "contact"
+          tabName = "about"
         )
       )
     ),
