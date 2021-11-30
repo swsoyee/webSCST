@@ -107,6 +107,7 @@ observeEvent(input$selected_cell_type_scrna, {
         data = scRNA@meta.data,
         x = "cell_type",
         y = "ST_cluster1",
+        ylab = paste0("ST_cluster", input$selected_cell_type_scrna),
         fill = "cell_type"
       ) +
         theme(
@@ -142,6 +143,9 @@ observeEvent(input$selected_cell_type_scrna, {
         scRNA,
         features = "ST_cluster1",
         label = TRUE
+      ) +
+      labs(
+        title = paste0("ST_cluster", input$selected_cell_type_scrna)
       )
     })
   }
