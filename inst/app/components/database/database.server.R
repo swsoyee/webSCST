@@ -115,7 +115,10 @@ observeEvent(input$database_sample, {
     pickerInput(
       inputId = "database_sample_gene_selector",
       label = "Gene Name",
-      choices = rownames(st)
+      choices = rownames(st),
+      options = list(
+        `live-search` = TRUE
+      )
     )
   })
 
