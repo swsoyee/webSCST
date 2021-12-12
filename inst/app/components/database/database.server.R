@@ -79,7 +79,32 @@ observeEvent(input$show_details, {
           label = "Name of Sample",
           choices = choices
         )
+      ),
+      fluidRow(
+        column = 12,
+        plotOutput("database_sample_dimplot")
       )
     )
   )
+})
+
+observeEvent(input$database_sample, {
+  dataset_id <- input$show_details
+  dataset_files_name <- grep(paste0("^", dataset_id, ".*", input$database_sample, ".*Rds"), list.files("./db"), value = TRUE)
+  position_sub_sub <- grep("position", dataset_files_name, value = TRUE)
+  st <- grep("st", dataset_files_name, value = TRUE)
+
+  position <- readRDS(paste0("./db/", position_sub_sub))
+  st <- readRDS(paste0("./db/", st))
+
+  embed_umap2 <- data.frame(
+    UMAP_1 = position$row,
+    UMAP_2 = position$col,
+    row.names = rownames(position)
+  )
+
+  st@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
+  output$database_sample_dimplot <- renderPlot({
+    DimPlot(st) + xlab("ST1") + ylab("ST2")
+  })
 })
