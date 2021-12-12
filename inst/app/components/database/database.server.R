@@ -51,9 +51,9 @@ output$database_table <- renderReactable({
         if (colInfo.id !== 'details') {
             return
         }
-
+        console.log(rowInfo);
         if (window.Shiny) {
-            Shiny.setInputValue('show_details', { index: rowInfo.index + 1 }, { priority: 'event' })
+            Shiny.setInputValue('show_details', { index: rowInfo.original.id }, { priority: 'event' })
         }
     }")
   )
