@@ -1,5 +1,10 @@
 output$database_table <- renderReactable({
 
+  data <- cbind(
+      global_data$database[show == TRUE, ],
+      details = NA
+  )
+
   col_def <- list(
       "id" = colDef(
           name = "ID",
@@ -23,16 +28,49 @@ output$database_table <- renderReactable({
       "year" = colDef(
           name = "Year",
           maxWidth = 100
-      )
+      ),
+      "show" = colDef(
+          show = FALSE
+      ),
+      "details" = colDef(
+        name = "",
+        sortable = FALSE,
+        maxWidth = 150,
+        cell = function() htmltools::tags$button("Show details", class = "action-button bttn bttn-fill bttn-sm bttn-primary bttn-block bttn-no-outline shiny-bound-input")
+    )
   )
 
   reactable(
-      global_data$database,
+      data,
       columns = col_def,
       bordered = TRUE,
       highlight = TRUE,
       searchable = TRUE,
       striped = TRUE,
       showPageSizeOptions = TRUE,
+      onClick = htmlwidgets::JS("function(rowInfo, colInfo) {
+        if (colInfo.id !== 'details') {
+            return
+        }
+
+        if (window.Shiny) {
+            Shiny.setInputValue('show_details', { index: rowInfo.index + 1 }, { priority: 'event' })
+        }
+    }")
   )
+})
+
+observeEvent(input$show_details, {
+    showModal(
+      modalDialog(
+          title = "Visualization Dataset",
+          fluidRow(
+              column = 6,
+              pickerInput(
+                inputId = "database_sample",
+                label = "Name of Sample",
+                choices = c("A", "B", "C") # TODO
+              )
+          ))
+    )
 })
