@@ -72,17 +72,31 @@ observeEvent(input$show_details, {
   showModal(
     modalDialog(
       title = "Visualization Dataset",
+      footer = modalButton("Close"),
+      size = "xl",
       fluidRow(
-        column = 6,
-        pickerInput(
-          inputId = "database_sample",
-          label = "Name of Sample",
-          choices = choices
+        column(
+          width = 6,
+          pickerInput(
+            inputId = "database_sample",
+            label = "Name of Sample",
+            choices = choices
+          )
+        ),
+        column(
+          width = 6,
+          uiOutput("database_sample_gene_selector")
         )
       ),
       fluidRow(
-        column = 12,
-        plotOutput("database_sample_dimplot")
+        column(
+          width = 6,
+          withSpinner(plotOutput("database_sample_dimplot"))
+        ),
+        column(
+          width = 6,
+          withSpinner(plotOutput("database_sample_featureplot"))
+        )
       )
     )
   )
@@ -97,6 +111,14 @@ observeEvent(input$database_sample, {
   position <- readRDS(paste0("./db/", position_sub_sub))
   st <- readRDS(paste0("./db/", st))
 
+  output$database_sample_gene_selector <- renderUI({
+    pickerInput(
+      inputId = "database_sample_gene_selector",
+      label = "Gene Name",
+      choices = rownames(st)
+    )
+  })
+
   embed_umap2 <- data.frame(
     UMAP_1 = position$row,
     UMAP_2 = position$col,
@@ -106,5 +128,10 @@ observeEvent(input$database_sample, {
   st@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
   output$database_sample_dimplot <- renderPlot({
     DimPlot(st) + xlab("ST1") + ylab("ST2")
+  })
+
+  output$database_sample_featureplot <- renderPlot({
+    req(input$database_sample, input$database_sample_gene_selector)
+    FeaturePlot(st, features = input$database_sample_gene_selector) + xlab("ST1") + ylab("ST2")
   })
 })
