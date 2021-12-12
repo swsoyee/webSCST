@@ -35,8 +35,8 @@ global_data <- reactiveValues(
   "upload_cell_type_file" = NULL,
   "scRNA" = NULL,
   "HBgenes" = c(
-    "HBA1","HBA2","HBB","HBD","HBE1",
-    "HBG1","HBG2","HBM","HBQ1","HBZ","ABC"
+    "HBA1", "HBA2", "HBB", "HBD", "HBE1",
+    "HBG1", "HBG2", "HBM", "HBQ1", "HBZ", "ABC"
   ),
   "quality_control_process_done" = FALSE,
   "scRNA_filter_1" = NULL,
@@ -45,7 +45,8 @@ global_data <- reactiveValues(
   "position_sub_sub" = NULL,
   "stRNA" = NULL,
   "gsva_done" = FALSE,
-  "gsva_stRNA" = NULL
+  "gsva_stRNA" = NULL,
+  "database" = fread("./db/database_list.csv")
 )
 
 options(shiny.maxRequestSize = 4000 * 1024^2)
