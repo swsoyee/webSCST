@@ -22,6 +22,11 @@ shinyUI(
           icon = icon("upload")
         ),
         menuItem(
+          text = "Database",
+          tabName = "database",
+          icon = icon("database")
+        ),
+        menuItem(
           text = "About",
           tabName = "about",
           icon = icon("envelope")
@@ -41,6 +46,10 @@ shinyUI(
         tabItem(
           tabName = "data-integration",
           source(file = "./pages/data-integration.R", local = TRUE)$value
+        ),
+        tabItem(
+          tabName = "database",
+          source(file = "./pages/database.R", local = TRUE)$value
         ),
         tabItem(
           tabName = "about"

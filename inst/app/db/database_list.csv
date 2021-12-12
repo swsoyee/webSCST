@@ -1,0 +1,11 @@
+id,title,organ,species,journal,year
+1,A coordinated progression of progenitor cell states initiates urinary tract development,urinary tract,mouse,Nat Comm,2021
+2,Visualization and analysis of gene expression in tissue sections by spatial transcriptomics,breast,human,Science,2016
+3,Visualization and analysis of gene expression in tissue sections by spatial transcriptomics,brain,mouse,Science,2016
+4,Spatial detection of fetal marker genes expressed at low level in adult human heart tissue,heart,human,Sci Rep,2017
+5,Spatial maps of prostate cancer transcriptomes reveal an unexplored landscape of heterogeneity,prostate,human,Nat Comm,2018
+6,Spatially resolved transcriptomics enables dissection of genetic heterogeneity in stage III cutaneous malignant melanoma,cutaneous,human,Can Res,2018
+7,Exploring inflammatory signatures in arthritic joint biopsies with Spatial Transcriptomics,joint,human,Sci Rep,2019
+8,A spatiotemporal organ-wide gene expression and cell atlas of the developing human heart,heart,human,Cell,2019
+9,Spatial transcriptome analysis of gastric cancer which GAN-KP transplanted C57BL/6J mouse,gastric,human,,2021
+10,Multimodal Analysis of Composition and Spatial Architecture in Human Squamous Cell Carcinoma",cutaneous,human,Cell,2020
