@@ -107,9 +107,7 @@ observeEvent(input$database_sample, {
   position_sub_sub <- grep("position", dataset_files_name, value = TRUE)
   st <- grep("st", dataset_files_name, value = TRUE)
 
-  print(position_sub_sub)
   position <- readRDS(paste0("./db/", position_sub_sub))
-  print(st)
   st <- readRDS(paste0("./db/", st))
 
   output$database_sample_gene_selector <- renderUI({
