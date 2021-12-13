@@ -103,11 +103,13 @@ observeEvent(input$show_details, {
 
 observeEvent(input$database_sample, {
   dataset_id <- input$show_details
-  dataset_files_name <- grep(paste0("^", dataset_id, ".*", input$database_sample, ".*Rds"), list.files("./db"), value = TRUE)
+  dataset_files_name <- grep(paste0("^", dataset_id, ".*_", input$database_sample, ".Rds"), list.files("./db"), value = TRUE)
   position_sub_sub <- grep("position", dataset_files_name, value = TRUE)
   st <- grep("st", dataset_files_name, value = TRUE)
 
+  print(position_sub_sub)
   position <- readRDS(paste0("./db/", position_sub_sub))
+  print(st)
   st <- readRDS(paste0("./db/", st))
 
   output$database_sample_gene_selector <- renderUI({
