@@ -107,7 +107,7 @@ fluidPage(
           width = 3,
           numericInputIcon(
             inputId = "top_gene_count",
-            label = "Top Variable Gene Numbers",
+            label = "Top Variables Genes",
             value = 10,
             step = 1
           )
