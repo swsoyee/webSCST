@@ -46,13 +46,67 @@ observeEvent(input$create_seurat_object, {
     title = "Finish building dataset",
     value = 100
   )
-  
+
+  output$seurat_object_summary_table <- renderReactable({
+    reactable(
+      data.frame(
+        "Indicator" = c(
+          "Gene",
+          "Cell",
+          "Cell Type"
+        ),
+        "Count" = c(
+          nrow(scRNA),
+          ncol(scRNA),
+          length(table(scRNA$cell_type))
+        )
+      )
+    )
+  })
+
   show_alert(
     session = session,
     title = "Submit finished",
     text = "Go to Quality Control tab to proceed data.",
     type = "success"
   )
+})
+
+output$seurat_object_summary_pie <- renderPlot({
+  if (!is.null(global_data$scRNA)) {
+    scRNA <- global_data$scRNA
+    cell_type <- as.data.frame(table(scRNA$cell_type))
+
+    colnames(cell_type) <- c("cell_types", "freq")
+    pie <- ggplot(
+      cell_type,
+      aes(x = "", y = freq, fill = factor(cell_types))
+    ) +
+      geom_bar(
+        width = 1,
+        stat = "identity"
+      ) +
+      theme(
+        axis.line = element_blank(),
+        plot.title = element_text(hjust = 0.5)
+      ) +
+      labs(
+        fill = "cell_types",
+        x = NULL,
+        y = NULL,
+        title = "Pie Chart of cell types"
+      )
+
+    pie + coord_polar(theta = "y", start = 0)
+  }
+})
+
+output$seurat_object_summary_pie_wrapper <- renderUI({
+  if (!is.null(global_data$scRNA)) {
+    plotOutput("seurat_object_summary_pie")
+  } else {
+    plotOutput("seurat_object_summary_pie", height = "1px")
+  }
 })
 
 observeEvent(input$upload_feature_file, {

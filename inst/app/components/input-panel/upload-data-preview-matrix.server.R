@@ -1,13 +1,9 @@
 output$upload_data_preview_matrix <- renderUI({
   tagList(
-    textOutput("upload_data_preview_matrix_description"),
+    textOutput("upload_data_preview_description"),
     tags$hr(),
-    callout(
-      title = "Structure Preview",
-      width = 12,
-      status = "info",
-      withSpinner(verbatimTextOutput("upload_data_preview_matrix_structure"))
-    )
+    uiOutput("seurat_object_summary_pie_wrapper"),
+    reactableOutput("seurat_object_summary_table")
   )
 })
 
@@ -72,16 +68,12 @@ observeEvent(input$loading_sample_data, {
   closeSweetAlert(session = session)
 })
 
-output$upload_data_preview_matrix_description <- renderText({
-  if (is.null(global_data$upload_matrix_file)) {
-    return("Please upload your matrix file first. A matrix file has the following structure:")
+output$upload_data_preview_description <- renderText({
+  if (is.null(global_data$scRNA)) {
+    return("When all data are  submitted, you will get summary information below.")
   } else {
-    return("Your matrix file has the following structure:")
+    return("The summary information for your dataset is as follows:")
   }
-})
-
-output$upload_data_preview_matrix_structure <- renderText({
-  return(global_data$matrix_preview)
 })
 
 observeEvent(input$upload_matrix_file, {
