@@ -85,16 +85,8 @@ fluidPage(
         title = "Multimodal intersection analysis (MIA)",
         uiOutput("run_mia"),
         tags$hr(),
-        fluidRow(
-          column(
-            width = 6,
-            plotOutput("mia_heatmap")
-          ),
-          column(
-            width = 6,
-            plotOutput("mia_dimplot")
-          )
-        )
+        plotOutput("mia_heatmap"),
+        plotOutput("mia_dimplot")
       ),
       tabPanel(
         title = "ssGSEA",
