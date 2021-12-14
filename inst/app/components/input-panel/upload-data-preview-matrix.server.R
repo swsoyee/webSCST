@@ -18,11 +18,6 @@ observeEvent(input$loading_sample_data, {
     value = 10,
   )
   global_data$upload_matrix_file <- readMM("./db/count_example.mtx")
-  out <- capture.output(
-    str(global_data$upload_matrix_file)
-  )
-  out_with_newline <- paste(out, collapse = "\n")
-  global_data$matrix_preview <- out_with_newline
 
   updateProgressBar(
     session = session,
@@ -114,10 +109,5 @@ observeEvent(input$upload_matrix_file, {
     value = 100
   )
 
-  out <- capture.output(
-    str(global_data$upload_matrix_file)
-  )
-  out_with_newline <- paste(out, collapse = "\n")
-  global_data$matrix_preview <- out_with_newline
   closeSweetAlert(session = session)
 })

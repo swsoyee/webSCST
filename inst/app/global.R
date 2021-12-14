@@ -17,19 +17,6 @@ library(GSVA)
 
 global_data <- reactiveValues(
   "upload_matrix_file" = NULL,
-  "matrix_preview" = paste(
-    capture.output(
-      str(
-        readMM(
-          system.file(
-            "external/pores_1.mtx",
-            package = "Matrix"
-          )
-        )
-      )
-    ),
-    collapse = "\n"
-  ),
   "upload_feature_file" = NULL,
   "upload_cell_file" = NULL,
   "upload_cell_type_file" = NULL,
