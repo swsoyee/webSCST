@@ -43,7 +43,7 @@ fluidPage(
       status = "primary",
       collapsible = FALSE,
       title = tagList(
-        "Matrix Preview"
+        "Data Preview"
       ),
       id = "upload-data-preview",
       tabPanel(
