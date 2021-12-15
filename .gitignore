@@ -39,3 +39,7 @@ vignettes/*.pdf
 pipeline_st/
 sc_marker.Rds
 scRNA.rds
+
+# Temprorary files for research
+RCTD_Plots/
+整合方法4_RCTD/
