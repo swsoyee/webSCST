@@ -96,6 +96,8 @@ output$normalization_plot <- renderPlot({
         nfeatures = input$features_count
       )
 
+      global_data$normalized_done <- TRUE
+
       top <- head(
         VariableFeatures(scRNA),
         input$top_gene_count

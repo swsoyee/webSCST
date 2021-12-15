@@ -32,6 +32,7 @@ global_data <- reactiveValues(
   "position_sub_sub" = NULL,
   "stRNA" = NULL,
   "gsva_done" = FALSE,
+  "normalized_done" = FALSE,
   "gsva_stRNA" = NULL,
   "database" = fread("./db/database_list.csv")
 )

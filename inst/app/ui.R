@@ -19,7 +19,7 @@ shinyUI(
         menuItem(
           text = "Data Integration",
           tabName = "data-integration",
-          icon = icon("upload")
+          icon = icon("object-group")
         ),
         menuItem(
           text = "Database",
