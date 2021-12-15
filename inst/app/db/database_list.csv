@@ -1,11 +1,44 @@
 id,title,organ,species,journal,year,show
-1,A coordinated progression of progenitor cell states initiates urinary tract development,urinary tract,mouse,Nat Comm,2021,true
-2,Visualization and analysis of gene expression in tissue sections by spatial transcriptomics,breast,human,Science,2016,true
-3,Visualization and analysis of gene expression in tissue sections by spatial transcriptomics,brain,mouse,Science,2016,true
-4,Spatial detection of fetal marker genes expressed at low level in adult human heart tissue,heart,human,Sci Rep,2017,true
-5,Spatial maps of prostate cancer transcriptomes reveal an unexplored landscape of heterogeneity,prostate,human,Nat Comm,2018,true
-6,Spatially resolved transcriptomics enables dissection of genetic heterogeneity in stage III cutaneous malignant melanoma,cutaneous,human,Can Res,2018,true
-7,Exploring inflammatory signatures in arthritic joint biopsies with Spatial Transcriptomics,joint,human,Sci Rep,2019,true
-8,A spatiotemporal organ-wide gene expression and cell atlas of the developing human heart,heart,human,Cell,2019,true
-9,Spatial transcriptome analysis of gastric cancer which GAN-KP transplanted C57BL/6J mouse,gastric,human,,2021,false
-10,Multimodal Analysis of Composition and Spatial Architecture in Human Squamous Cell Carcinoma",cutaneous,human,Cell,2020,true
+1,A coordinated progression of progenitor cell states initiates urinary tract development,urinary tract,mouse,Nat Comm,2021,TRUE
+2,Visualization and analysis of gene expression in tissue sections by spatial transcriptomics,breast,human,Science,2016,TRUE
+3,Visualization and analysis of gene expression in tissue sections by spatial transcriptomics,brain,mouse,Science,2016,TRUE
+4,Spatial detection of fetal marker genes expressed at low level in adult human heart tissue,heart,human,Sci Rep,2017,TRUE
+5,Spatial maps of prostate cancer transcriptomes reveal an unexplored landscape of heterogeneity,prostate,human,Nat Comm,2018,TRUE
+6,Spatially resolved transcriptomics enables dissection of genetic heterogeneity in stage III cutaneous malignant melanoma,cutaneous,human,Can Res,2018,TRUE
+7,Exploring inflammatory signatures in arthritic joint biopsies with Spatial Transcriptomics,joint,human,Sci Rep,2019,TRUE
+8,A spatiotemporal organ-wide gene expression and cell atlas of the developing human heart,heart,human,Cell,2019,TRUE
+9,Spatial transcriptome analysis of gastric cancer which GAN-KP transplanted C57BL/6J mouse,gastric,human,-,2021,TRUE
+10,"Multimodal Analysis of Composition and Spatial Architecture in Human Squamous Cell Carcinoma""",cutaneous,human,Cell,2020,TRUE
+11,Adult Mouse Brain (FFPE),brain,mouse,10X Geno,2021,TRUE
+12,"Adult Mouse Brain, IF stained (FFPE)",brain,mouse,10X Geno,2021,TRUE
+13,Adult Mouse Kidney (FFPE),kidney,mouse,10X Geno,2021,TRUE
+14,"Human Breast Cancer: Ductal Carcinoma In Situ, Invasive Carcinoma (FFPE)",breast,human,10X Geno,2021,TRUE
+15,"Human Prostate Cancer, Acinar Cell Carcinoma (FFPE)",prostate,human,10X Geno,2021,TRUE
+16,"Human Prostate Cancer, Adenocarcinoma with Invasive Carcinoma (FFPE)",prostate,human,10X Geno,2021,TRUE
+17,"Human Prostate Cancer, Adjacent Normal Section with IF staining (FFPE)",prostate,human,10X Geno,2021,TRUE
+18,Normal Human Prostate (FFPE),prostate,human,10X Geno,2021,TRUE
+19,"Adult Human Brain 1 (Cerebral Cortex, Unknown orientation). Stains: Anti-GFAP, Anti-NFH",brain,human,10X Geno,2020,TRUE
+20,"Adult Human Brain 2 (Cerebral Cortex, Unknown orientation). Stains: Anti-SNAP25, Anti-NFH",brain,human,10X Geno,2020,TRUE
+21,"Adult Mouse Brain Section 1 (Coronal). Stains: DAPI, Anti-NeuN",brain,mouse,10X Geno,2020,TRUE
+22,"Adult Mouse Brain Section 2 (Coronal). Stains: DAPI, Anti-GFAP, Anti-NeuN",brain,mouse,10X Geno,2020,TRUE
+23,"Human Breast Cancer: Targeted, Immunology Panel",breast,human,10X Geno,2020,TRUE
+24,Human Breast Cancer: Whole Transcriptome Analysis,breast,human,10X Geno,2020,TRUE
+25,"Human Cerebellum: Targeted, Neuroscience Panel",cerebellum,human,10X Geno,2020,TRUE
+26,"Human Cerebellum: Targeted-Compare, Neuroscience Panel",cerebellum,human,10X Geno,2020,TRUE
+27,Human Cerebellum: Whole Transcriptome Analysis,cerebellum,human,10X Geno,2020,TRUE
+28,"Human Colorectal Cancer: Targeted, Gene Signature Panel",colorectal,human,10X Geno,2020,TRUE
+29,Human Colorectal Cancer: Whole Transcriptome Analysis,colorectal,human,10X Geno,2020,TRUE
+30,"Human Glioblastoma: Targeted, Pan-Cancer Panel",brain,human,10X Geno,2020,TRUE
+31,Human Glioblastoma: Whole Transcriptome Analysis,brain,human,10X Geno,2020,TRUE
+32,"Human Ovarian Cancer: Targeted, Immunology Panel. Stains: DAPI, Anti-PanCK, Anti-CD45",ovary,human,10X Geno,2020,TRUE
+33,"Human Ovarian Cancer: Targeted, Pan-Cancer Panel. Stains: DAPI, Anti-PanCK, Anti-CD45",ovary,human,10X Geno,2020,TRUE
+34,"Human Ovarian Cancer: Whole Transcriptome Analysis. Stains: DAPI, Anti-PanCK, Anti-CD45",ovary,human,10X Geno,2020,TRUE
+35,"Human Spinal Cord: Targeted, Neuroscience Panel. Stains: DAPI, Anti-SNAP25, Anti-GFAP, Anti-Myelin CNPase",spinal cord,human,10X Geno,2020,TRUE
+36,"Human Spinal Cord: Whole Transcriptome Analysis. Stains: DAPI, Anti-SNAP25, Anti-GFAP, Anti-Myelin CNPase",spinal cord,human,10X Geno,2020,TRUE
+37,Human Breast Cancer (Block A£©,breast,human,10X Geno,2020,TRUE
+38,Human Heart,heart,human,10X Geno,2020,TRUE
+39,Human Lymph Node,lymph node,human,10X Geno,2020,TRUE
+40,Mouse Brain Section (Coronal),brain,mouse,10X Geno,2020,TRUE
+41,Mouse Brain (Sagittal-Anterior),brain,mouse,10X Geno,2020,TRUE
+42,Mouse Brain (Sagittal-Posterior),brain,mouse,10X Geno,2020,TRUE
+43,Mouse Kidney Section (Coronal),kidney,mouse,10X Geno,2020,TRUE
