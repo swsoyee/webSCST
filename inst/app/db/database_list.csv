@@ -35,7 +35,7 @@ id,title,organ,species,journal,year,show
 34,"Human Ovarian Cancer: Whole Transcriptome Analysis. Stains: DAPI, Anti-PanCK, Anti-CD45",ovary,human,10X Geno,2020,TRUE
 35,"Human Spinal Cord: Targeted, Neuroscience Panel. Stains: DAPI, Anti-SNAP25, Anti-GFAP, Anti-Myelin CNPase",spinal cord,human,10X Geno,2020,TRUE
 36,"Human Spinal Cord: Whole Transcriptome Analysis. Stains: DAPI, Anti-SNAP25, Anti-GFAP, Anti-Myelin CNPase",spinal cord,human,10X Geno,2020,TRUE
-37,Human Breast Cancer (Block A£©,breast,human,10X Geno,2020,TRUE
+37,Human Breast Cancer (Block A),breast,human,10X Geno,2020,TRUE
 38,Human Heart,heart,human,10X Geno,2020,TRUE
 39,Human Lymph Node,lymph node,human,10X Geno,2020,TRUE
 40,Mouse Brain Section (Coronal),brain,mouse,10X Geno,2020,TRUE
