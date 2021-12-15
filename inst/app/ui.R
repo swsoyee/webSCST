@@ -11,6 +11,11 @@ shinyUI(
       sidebarMenu(
         id = "main_sidebar",
         menuItem(
+          text = "Home",
+          tabName = "home",
+          icon = icon("home")
+        ),
+        menuItem(
           text = "File Upload",
           tabName = "file-upload",
           icon = icon("upload")
@@ -35,6 +40,10 @@ shinyUI(
     ),
     body = dashboardBody(
       tabItems(
+        tabItem(
+          tabName = "home",
+          source(file = "./pages/home.R", local = TRUE)$value
+        ),
         tabItem(
           tabName = "file-upload",
           source(file = "./pages/input-panel.R", local = TRUE)$value
