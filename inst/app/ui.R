@@ -4,7 +4,8 @@ shinyUI(
     header = dashboardHeader(
       title = dashboardBrand(
         title = "webSCST",
-        color = "primary"
+        color = "primary",
+        image = "./logo.png"
       )
     ),
     sidebar = dashboardSidebar(
