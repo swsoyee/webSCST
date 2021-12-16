@@ -58,20 +58,88 @@ output$species_and_organ_selector_table <- renderReactable({
 selected_data_from_database <- reactive(getReactableState("species_and_organ_selector_table", "selected"))
 
 observeEvent(input$sample_selection, {
-    if (!is.null(selected_data_from_database())) {
-        global_data$sample_name_of_file <- selected_data_from_database()
-    }
-    if (is.null(global_data$sample_name_of_file)) {
-        show_alert(
-        session = session,
-        title = "Error",
-        text = "Please select a sample first.",
-        type = "error"
+  if (!is.null(selected_data_from_database())) {
+    global_data$sample_name_of_file <- selected_data_from_database()
+  }
+  if (is.null(global_data$sample_name_of_file)) {
+    show_alert(
+      session = session,
+      title = "Error",
+      text = "Please select a sample first.",
+      type = "error"
     )
-    }
-    if (!is.null(global_data$sample_name_of_file)) {
-        row <- species_and_organ_table()[selected_data_from_database()]
-        position_file_name <- paste0(as.character(row$id), "_position_", row$sample_name, ".Rds")
-        st_file_name <- paste0(as.character(row$id), "_st_", row$sample_name, ".Rds")
-    }
+  }
+  if (!is.null(global_data$sample_name_of_file)) {
+    progressSweetAlert(
+      session = session,
+      id = "loading-background-dataset",
+      title = "Loading dataset...",
+      display_pct = TRUE,
+      value = 10,
+    )
+    row <- species_and_organ_table()[selected_data_from_database()]
+    database_path <- "./db/"
+    position_file_name <- paste0(
+      database_path,
+      as.character(row$id),
+      "_position_",
+      row$sample_name,
+      ".Rds"
+    )
+    updateProgressBar(
+      session = session,
+      id = "loading-background-dataset",
+      title = "Loading position dataset.",
+      value = 40
+    )
+    global_data$position_sub_sub <- readRDS(position_file_name)
+    position_sub_sub <- global_data$position_sub_sub
+
+    st_file_name <- paste0(
+      database_path,
+      as.character(row$id),
+      "_st_",
+      row$sample_name,
+      ".Rds"
+    )
+    updateProgressBar(
+      session = session,
+      id = "loading-background-dataset",
+      title = "Loading stRNA dataset.",
+      value = 60
+    )
+    stRNA <- readRDS(st_file_name)
+    print(position_sub_sub)
+    embed_umap2 <- data.frame(
+      UMAP_1 = position_sub_sub$row,
+      UMAP_2 = position_sub_sub$col,
+      row.names = rownames(position_sub_sub)
+    )
+    stRNA@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
+    global_data$stRNA <- stRNA
+
+    updateProgressBar(
+      session = session,
+      id = "loading-background-dataset",
+      title = "Loading marker dataset.",
+      value = 80
+    )
+    marker_file_name <- paste0(
+      database_path,
+      as.character(row$id),
+      "_marker_",
+      row$sample_name,
+      ".Rds"
+    )
+    global_data$st_marker <- readRDS(marker_file_name)
+    updateProgressBar(
+      session = session,
+      id = "loading-background-dataset",
+      title = "Loading finished.",
+      value = 100
+    )
+
+    Sys.sleep(1)
+    closeSweetAlert(session = session)
+  }
 })

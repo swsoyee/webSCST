@@ -15,7 +15,6 @@ observeEvent(input$submit_rds_file, {
     value = 50
   )
   global_data$marker <- readRDS(input$upload_markers_file$datapath)
-  global_data$st_marker <- readRDS("./db/st_marker.Rds")
 
   updateProgressBar(
     session = session,
@@ -23,19 +22,7 @@ observeEvent(input$submit_rds_file, {
     title = "Loading position database...",
     value = 80
   )
-  load("./db/position.Rds")
-  global_data$position_sub_sub <- position_sub_sub
-  load("./db/stRNA.rds")
 
-  embed_umap2 <- data.frame(
-    UMAP_1 = position_sub_sub$x,
-    UMAP_2 = position_sub_sub$y,
-    row.names = rownames(position_sub_sub)
-  )
-
-  stRNA@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
-
-  global_data$stRNA <- stRNA
   updateProgressBar(
     session = session,
     id = "loading-rds",
@@ -135,20 +122,6 @@ observeEvent(input$load_qc_result, {
     display_pct = TRUE,
     value = 10,
   )
-  load("./db/position.Rds")
-  global_data$position_sub_sub <- position_sub_sub
-  load("./db/stRNA.rds")
-  global_data$st_marker <- readRDS("./db/st_marker.Rds")
-
-  embed_umap2 <- data.frame(
-    UMAP_1 = position_sub_sub$x,
-    UMAP_2 = position_sub_sub$y,
-    row.names = rownames(position_sub_sub)
-  )
-
-  stRNA@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
-
-  global_data$stRNA <- stRNA
 
   if (is.null(global_data$marker)) {
     updateProgressBar(
