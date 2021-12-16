@@ -1,13 +1,39 @@
 fluidPage(
   fluidRow(
+    box(
+      title = "Species and Organ",
+      solidHeader = TRUE,
+      status = "primary",
+      label = boxLabel(
+        "Step 1",
+        status = "white"
+      ),
+      width = 12,
+      reactableOutput("species_and_organ_selector_table"),
+      tags$hr(),
+      actionBttn(
+        inputId = "sample_selection",
+        label = "Load Data",
+        color = "primary",
+        icon = icon("play"),
+        size = "sm",
+        style = "fill",
+        block = TRUE
+      )
+    )
+  ),
+  fluidRow(
     tabBox(
       id = "select-dataset-and-markders",
       width = 12,
       solidHeader = TRUE,
       status = "primary",
-      collapsible = FALSE,
       title = tagList(
-        "Select Dataset and Markers"
+        "Dataset and Markers"
+      ),
+      label = boxLabel(
+        "Step 2",
+        status = "white"
       ),
       side = "right",
       type = "tabs",
@@ -53,6 +79,10 @@ fluidPage(
       width = 12,
       title = tagList(
         "Integration"
+      ),
+      label = boxLabel(
+        "Step 3",
+        status = "white"
       ),
       side = "right",
       solidHeader = TRUE,

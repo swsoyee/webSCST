@@ -34,7 +34,37 @@ global_data <- reactiveValues(
   "gsva_done" = FALSE,
   "normalized_done" = FALSE,
   "gsva_stRNA" = NULL,
-  "database" = fread("./db/database_list.csv")
+  "database" = fread("./db/database_list.csv"),
+  "sample_name_of_file" = NULL
 )
+
+species_and_organ_table <- reactive({
+  all_dataset_in_db <- grep(paste0("^[0-9]+?_.+\\.Rds"), list.files("./db"), value = TRUE)
+  all_dataset_ind_db_name <- gsub(".Rds", "", all_dataset_in_db)
+
+  split_file_name <- strsplit(all_dataset_ind_db_name, "_")
+
+  index_table <- data.frame(
+    matrix(
+      unlist(split_file_name),
+      nrow = length(split_file_name),
+      byrow = TRUE
+    )
+  )
+
+  index_table_final <- unique(
+    data.frame(
+      "id" = as.numeric(index_table[, 1]),
+      "sample_name" = index_table[, 3:ncol(index_table)]
+    )
+  )
+
+  result_table <- left_join(
+    x = global_data$database,
+    y = index_table_final,
+    by = "id"
+  )
+  result_table
+})
 
 options(shiny.maxRequestSize = 4000 * 1024^2)
