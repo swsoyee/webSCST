@@ -1,0 +1,13 @@
+name: webSCST
+title: webSCST
+username:
+account: zilongzhang
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5337654
+bundleId: 5380828
+url: https://zilongzhang.shinyapps.io/webSCST/
+when: 1639673644.74828
+lastSyncTime: 1639673644.74828
+asMultiple: FALSE
+asStatic: FALSE
