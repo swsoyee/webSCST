@@ -48,9 +48,7 @@ fluidPage(
         tags$h2("Contact"),
         "For questions and suggestions, please contact:",
         tags$br(),
-        "System Designer:", tags$b("Zilong Zhang"), "(zhangzilong@bi.a.u-tokyo.ac.jp) or ", tags$b("Quan Zou"), " (quanzou@nclab.net)",
-        tags$br(),
-        "Appliction Developer: ", tags$b("Wei Su"), " (suwei@bi.a.u-tokyo.ac.jp)"
+        tags$b("Zilong Zhang"), "(zhangzilong@bi.a.u-tokyo.ac.jp) or ", tags$b("Quan Zou"), " (quanzou@nclab.net)",
       )
     )
   )
