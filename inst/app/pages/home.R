@@ -42,7 +42,7 @@ fluidPage(
         tags$li("Step 3. Currently, four popular integration methods have been included in webSCST. Users could interactively select any method and download the integration results they are interested in."),
         tags$br(),
         tags$h2("Cite webSCST"),
-        "Zilong Zhang，Feifei Cui, Wei Su, Chen Cao, Quan Zou*. webSCST: an interactive web application for single-cell RNA-seq data and spatial transcriptome data integration.",
+        "Zilong Zhang, Feifei Cui, Wei Su, Chen Cao, Quan Zou*. webSCST: an interactive web application for single-cell RNA-seq data and spatial transcriptome data integration.",
         tags$br(),
         tags$br(),
         tags$h2("Contact"),
