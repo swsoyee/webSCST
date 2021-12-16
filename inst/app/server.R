@@ -4,6 +4,7 @@ shinyServer(function(input, output, session) {
   source(file = "./components/input-panel/upload-dataset-summary.server.R", local = TRUE)
   source(file = "./components/quality-control/side-menu.server.R", local = TRUE)
   source(file = "./components/quality-control/quality-control-plot.server.R", local = TRUE)
+  source(file = "./components/data-integration/species-organ-selector.server.R", local = TRUE)
   source(file = "./components/data-integration/rds-file-upload.server.R", local = TRUE)
   source(file = "./components/data-integration/add-module-score.server.R", local = TRUE)
   source(file = "./components/data-integration/mia.server.R", local = TRUE)
