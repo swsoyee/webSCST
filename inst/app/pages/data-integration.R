@@ -1,28 +1,5 @@
 fluidPage(
   fluidRow(
-    box(
-      title = "Species and Organ",
-      solidHeader = TRUE,
-      status = "primary",
-      label = boxLabel(
-        "Step 1",
-        status = "white"
-      ),
-      width = 12,
-      reactableOutput("species_and_organ_selector_table"),
-      tags$hr(),
-      actionBttn(
-        inputId = "sample_selection",
-        label = "Load Data",
-        color = "primary",
-        icon = icon("play"),
-        size = "sm",
-        style = "fill",
-        block = TRUE
-      )
-    )
-  ),
-  fluidRow(
     tabBox(
       id = "select-dataset-and-markders",
       width = 12,
@@ -32,7 +9,7 @@ fluidPage(
         "Dataset and Markers"
       ),
       label = boxLabel(
-        "Step 2",
+        "Step 1",
         status = "white"
       ),
       side = "right",
@@ -70,6 +47,29 @@ fluidPage(
         title = "Load QC Result",
         value = "load-qc-result",
         uiOutput("load_qc_result")
+      )
+    )
+  ),
+  fluidRow(
+    box(
+      title = "Species and Organ",
+      solidHeader = TRUE,
+      status = "primary",
+      label = boxLabel(
+        "Step 2",
+        status = "white"
+      ),
+      width = 12,
+      reactableOutput("species_and_organ_selector_table"),
+      tags$hr(),
+      actionBttn(
+        inputId = "sample_selection",
+        label = "Load Data",
+        color = "primary",
+        icon = icon("play"),
+        size = "sm",
+        style = "fill",
+        block = TRUE
       )
     )
   ),
