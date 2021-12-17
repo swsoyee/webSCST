@@ -42,7 +42,7 @@ output$cell_type_selector_gsva <- renderUI({
 })
 
 observeEvent(input$run_gsva, {
-  if (!is.null(global_data$marker)) {
+  if (!is.null(global_data$marker) && !is.null(global_data$stRNA)) {
     stRNA <- global_data$stRNA
     sc.marker <- global_data$marker
 
@@ -76,29 +76,34 @@ observeEvent(input$run_gsva, {
 
     expr <- as.matrix(stRNA@assays$RNA@counts)
 
-    es.matrix <- gsva(
-      expr,
-      top20.list,
-      kcdf = "Poisson",
-      method = "ssgsea",
-      abs.ranking = T,
-      parallel.sz = 3
+    tryCatch(
+      {
+        es.matrix <- gsva(
+          expr,
+          top20.list,
+          kcdf = "Poisson",
+          method = "ssgsea",
+          abs.ranking = T,
+          parallel.sz = 3
+        )
+
+        es.matrix <- as.data.frame(t(es.matrix))
+        stRNA <- AddMetaData(stRNA, es.matrix)
+
+        global_data$gsva_stRNA <- stRNA
+        global_data$gsva_done <- TRUE
+
+        closeSweetAlert(session = session)
+      },
+      error = function(cond) {
+        show_alert(
+          session = session,
+          title = "Error",
+          text = cond,
+          type = "error"
+        )
+      }
     )
-
-    es.matrix <- as.data.frame(t(es.matrix))
-    stRNA <- AddMetaData(stRNA, es.matrix)
-
-    global_data$gsva_stRNA <- stRNA
-    global_data$gsva_done <- TRUE
-
-    updateProgressBar(
-      session = session,
-      id = "run-gsva",
-      title = "Estimating finished.",
-      value = 100
-    )
-    Sys.sleep(1)
-    closeSweetAlert(session = session)
   }
 })
 

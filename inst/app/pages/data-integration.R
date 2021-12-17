@@ -17,6 +17,15 @@ fluidPage(
       tabPanel(
         title = "Upload",
         value = "upload",
+        actionBttn(
+          inputId = "load_clean_sc_data_demo",
+          label = "Load Demo",
+          color = "primary",
+          icon = icon("play"),
+          size = "sm",
+          style = "fill",
+          block = TRUE
+        ),
         fluidRow(
           column(
             width = 6,

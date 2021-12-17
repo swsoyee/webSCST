@@ -83,7 +83,7 @@ observeEvent(input$run_mia, {
           .row = sc,
           .value = p,
           .scale = "both",
-          show_column_names = F,
+          show_column_names = FALSE,
           palette_value = c("#1B4584", "white", "#660621"),
           palette_grouping = list(c("red", "blue")),
           rect_gp = grid::gpar(col = "black", lwd = 1),
@@ -101,8 +101,8 @@ observeEvent(input$run_mia, {
     stRNA <- global_data$stRNA
     position_sub_sub <- global_data$position_sub_sub
     embed_umap2 <- data.frame(
-      UMAP_1 = position_sub_sub$x,
-      UMAP_2 = position_sub_sub$y,
+      UMAP_1 = position_sub_sub$row,
+      UMAP_2 = position_sub_sub$col,
       row.names = rownames(position_sub_sub)
     )
 

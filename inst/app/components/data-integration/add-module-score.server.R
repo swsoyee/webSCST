@@ -1,5 +1,5 @@
 output$cell_type_selector_strna <- renderUI({
-  if (!is.null(global_data$marker)) {
+  if (!is.null(global_data$marker) && !is.null(global_data$stRNA)) {
     pickerInput(
       inputId = "selected_cell_type_strna",
       label = "Name of Cell Type",
@@ -37,7 +37,7 @@ output$cell_type_selector_scrna <- renderUI({
 })
 
 observeEvent(input$selected_cell_type_strna, {
-  if (!is.null(global_data$marker)) {
+  if (!is.null(global_data$marker) && !is.null(global_data$stRNA)) {
     sc.marker <- global_data$marker
     stRNA <- global_data$stRNA
     all.markers <- sc.marker %>%
@@ -78,7 +78,7 @@ observeEvent(input$selected_cell_type_strna, {
 })
 
 observeEvent(input$selected_cell_type_scrna, {
-  if (!is.null(global_data$st_marker)) {
+  if (!is.null(global_data$st_marker) && !is.null(global_data$scRNA_filter_1)) {
     st.marker <- global_data$st_marker
     scRNA <- global_data$scRNA_filter_1
 
@@ -100,7 +100,13 @@ observeEvent(input$selected_cell_type_scrna, {
       display_pct = TRUE,
       value = 10,
     )
-    scRNA <- AddModuleScore(scRNA, features = score_list, name = "ST_cluster")
+
+    tryCatch(
+      {
+        scRNA <- AddModuleScore(scRNA, features = score_list, name = "ST_cluster")
+      },
+      error = {}
+    )
 
     output$selected_cell_type_scrna_violin <- renderPlot({
       ggviolin(
@@ -144,9 +150,9 @@ observeEvent(input$selected_cell_type_scrna, {
         features = "ST_cluster1",
         label = TRUE
       ) +
-      labs(
-        title = paste0("ST_cluster", input$selected_cell_type_scrna)
-      )
+        labs(
+          title = paste0("ST_cluster", input$selected_cell_type_scrna)
+        )
     })
   }
 })

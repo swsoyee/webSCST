@@ -19,19 +19,17 @@ observeEvent(input$submit_rds_file, {
   updateProgressBar(
     session = session,
     id = "loading-rds",
-    title = "Loading position database...",
-    value = 80
-  )
-
-  updateProgressBar(
-    session = session,
-    id = "loading-rds",
     title = "Loading finished.",
     value = 100
   )
 
-  Sys.sleep(1)
   closeSweetAlert(session = session)
+  show_alert(
+    session = session,
+    title = "Done",
+    text = "Loading dataset finished.",
+    type = "success"
+  )
 })
 
 output$load_qc_result <- renderUI({
@@ -146,4 +144,38 @@ observeEvent(input$load_qc_result, {
 
   Sys.sleep(1)
   closeSweetAlert(session = session)
+})
+
+observeEvent(input$load_clean_sc_data_demo, {
+  progressSweetAlert(
+    session = session,
+    id = "loading-rds",
+    title = "Loading dataset...",
+    display_pct = TRUE,
+    value = 10,
+  )
+  global_data$scRNA_filter_1 <- readRDS("./db/scRNA_demo.rds")
+
+  updateProgressBar(
+    session = session,
+    id = "loading-rds",
+    title = "Loading markers",
+    value = 50
+  )
+  global_data$marker <- readRDS("./db/Markers_demo.rds")
+
+  updateProgressBar(
+    session = session,
+    id = "loading-rds",
+    title = "Loading finished.",
+    value = 100
+  )
+
+  closeSweetAlert(session = session)
+  show_alert(
+    session = session,
+    title = "Done",
+    text = "Loading dataset finished.",
+    type = "success"
+  )
 })
