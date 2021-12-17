@@ -77,6 +77,16 @@ fluidPage(
             width = 6,
             uiOutput("organ_selector")
           )
+        ),
+        tags$br(),
+        actionBttn(
+          inputId = "sample_selection_auto",
+          label = "Load Data",
+          color = "primary",
+          icon = icon("play"),
+          size = "sm",
+          style = "fill",
+          block = TRUE
         )
       ),
       tabPanel(
