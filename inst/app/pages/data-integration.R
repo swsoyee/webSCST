@@ -6,7 +6,7 @@ fluidPage(
       solidHeader = TRUE,
       status = "primary",
       title = tagList(
-        "Match Spatial Data"
+        "Load Clean Single-cell Data"
       ),
       label = boxLabel(
         "Step 1",
