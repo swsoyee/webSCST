@@ -60,7 +60,7 @@ fluidPage(
     tabBox(
       id = "choose-species-and-organ",
       title = tagList(
-        "Choose Species and Organ"
+        "Match Spatial Data"
       ),
       solidHeader = TRUE,
       status = "primary",
