@@ -6,7 +6,7 @@ fluidPage(
       solidHeader = TRUE,
       status = "primary",
       title = tagList(
-        "Dataset and Markers"
+        "Load Clean Single-cell Data"
       ),
       label = boxLabel(
         "Step 1",
@@ -52,7 +52,7 @@ fluidPage(
   ),
   fluidRow(
     box(
-      title = "Species and Organ",
+      title = "Choose Species and Organ",
       solidHeader = TRUE,
       status = "primary",
       label = boxLabel(
