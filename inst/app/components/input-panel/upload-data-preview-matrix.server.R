@@ -59,8 +59,13 @@ observeEvent(input$loading_sample_data, {
     title = "Loading finished",
     value = 100
   )
-  Sys.sleep(1)
   closeSweetAlert(session = session)
+  show_alert(
+    session = session,
+    title = "Done",
+    text = "Loading demo dataset complete.",
+    type = "success"
+  )
 })
 
 output$upload_data_preview_description <- renderText({
