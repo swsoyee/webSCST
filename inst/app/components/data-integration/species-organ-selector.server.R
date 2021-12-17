@@ -143,3 +143,21 @@ observeEvent(input$sample_selection, {
     closeSweetAlert(session = session)
   }
 })
+
+output$species_selector <- renderUI({
+  pickerInput(
+    inputId = "species_selector",
+    label = "Species",
+    choices = unique(species_and_organ_table()$species)
+  )
+})
+
+observeEvent(input$species_selector, {
+  output$organ_selector <- renderUI({
+    pickerInput(
+      inputId = "organ_selector",
+      label = "Organ",
+      choices = unique(species_and_organ_table()[species == input$species_selector, ]$organ)
+    )
+  })
+})

@@ -51,25 +51,48 @@ fluidPage(
     )
   ),
   fluidRow(
-    box(
-      title = "Choose Species and Organ",
+    tabBox(
+      id = "choose-species-and-organ",
+      title = tagList(
+        "Choose Species and Organ"
+      ),
       solidHeader = TRUE,
       status = "primary",
+      side = "right",
+      type = "tabs",
       label = boxLabel(
         "Step 2",
         status = "white"
       ),
       width = 12,
-      reactableOutput("species_and_organ_selector_table"),
-      tags$hr(),
-      actionBttn(
-        inputId = "sample_selection",
-        label = "Load Data",
-        color = "primary",
-        icon = icon("play"),
-        size = "sm",
-        style = "fill",
-        block = TRUE
+      tabPanel(
+        title = "Match Spatial Dataset Automatically",
+        value = "match-spatial-dataset-automatically",
+        fluidRow(
+          column(
+            width = 6,
+            uiOutput("species_selector")
+          ),
+          column(
+            width = 6,
+            uiOutput("organ_selector")
+          )
+        )
+      ),
+      tabPanel(
+        title = "Match Spatial Dataset Manually",
+        value = "match-spatial-dataset-menually",
+        reactableOutput("species_and_organ_selector_table"),
+        tags$hr(),
+        actionBttn(
+          inputId = "sample_selection",
+          label = "Load Data",
+          color = "primary",
+          icon = icon("play"),
+          size = "sm",
+          style = "fill",
+          block = TRUE
+        )
       )
     )
   ),
