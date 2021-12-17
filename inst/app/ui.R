@@ -1,11 +1,18 @@
 shinyUI(
   dashboardPage(
     title = "webSCST",
+    scrollToTop = TRUE,
+    fullscreen = TRUE,
     header = dashboardHeader(
       title = dashboardBrand(
         title = "webSCST",
         color = "primary",
         image = "./logo.png"
+      ),
+      leftUi = tags$li(
+        "webSCST: an interactive web application for single-cell RNA-seq data and spatial transcriptome data integration",
+        class = "dropdown",
+        style = "margin:auto;"
       )
     ),
     sidebar = dashboardSidebar(
