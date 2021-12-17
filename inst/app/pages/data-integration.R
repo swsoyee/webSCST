@@ -40,15 +40,12 @@ fluidPage(
               inputId = "upload_markers_file",
               label = "Markers (rds)",
             )
-          ),
-          actionBttn(
-            inputId = "submit_rds_file",
-            label = "Submit",
-            color = "primary",
-            icon = icon("play"),
-            size = "sm",
-            style = "fill",
-            block = TRUE
+          )
+        ),
+        fluidRow(
+          column(
+            width = 12,
+            uiOutput("submit_clean_sc_data")
           )
         )
       ),

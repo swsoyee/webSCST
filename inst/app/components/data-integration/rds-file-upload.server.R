@@ -1,35 +1,58 @@
+output$submit_clean_sc_data <- renderUI({
+  if (!is.null(input$upload_seurat_object_file$datapath) && !is.null(input$upload_markers_file$datapath)) {
+    actionBttn(
+      inputId = "submit_rds_file",
+      label = "Submit",
+      color = "primary",
+      icon = icon("play"),
+      size = "sm",
+      style = "fill",
+      block = TRUE
+    )
+  }
+})
+
 observeEvent(input$submit_rds_file, {
-  progressSweetAlert(
-    session = session,
-    id = "loading-rds",
-    title = "Loading dataset...",
-    display_pct = TRUE,
-    value = 10,
-  )
-  global_data$scRNA_filter_1 <- readRDS(input$upload_seurat_object_file$datapath)
+  if (!is.null(input$upload_seurat_object_file$datapath) && !is.null(input$upload_markers_file$datapath)) {
+    progressSweetAlert(
+      session = session,
+      id = "loading-rds",
+      title = "Loading dataset...",
+      display_pct = TRUE,
+      value = 10,
+    )
+    global_data$scRNA_filter_1 <- readRDS(input$upload_seurat_object_file$datapath)
 
-  updateProgressBar(
-    session = session,
-    id = "loading-rds",
-    title = "Loading markers",
-    value = 50
-  )
-  global_data$marker <- readRDS(input$upload_markers_file$datapath)
+    updateProgressBar(
+      session = session,
+      id = "loading-rds",
+      title = "Loading markers",
+      value = 50
+    )
+    global_data$marker <- readRDS(input$upload_markers_file$datapath)
 
-  updateProgressBar(
-    session = session,
-    id = "loading-rds",
-    title = "Loading finished.",
-    value = 100
-  )
+    updateProgressBar(
+      session = session,
+      id = "loading-rds",
+      title = "Loading finished.",
+      value = 100
+    )
 
-  closeSweetAlert(session = session)
-  show_alert(
-    session = session,
-    title = "Done",
-    text = "Loading dataset finished.",
-    type = "success"
-  )
+    closeSweetAlert(session = session)
+    show_alert(
+      session = session,
+      title = "Done",
+      text = "Loading dataset finished.",
+      type = "success"
+    )
+  } else {
+    show_alert(
+      session = session,
+      title = "Error",
+      text = "Please upload your dataset file first.",
+      type = "error"
+    )
+  }
 })
 
 output$load_qc_result <- renderUI({
