@@ -69,7 +69,8 @@ shinyUI(
           source(file = "./pages/database.R", local = TRUE)$value
         ),
         tabItem(
-          tabName = "about"
+          tabName = "about",
+          source(file = "./pages/about.R", local = TRUE)$value
         )
       )
     ),

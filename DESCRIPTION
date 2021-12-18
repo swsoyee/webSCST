@@ -27,7 +27,8 @@ Imports:
     ggpubr,
     GSVA,
     tidyHeatmap,
-    patchwork
+    patchwork,
+    markdown
 Suggests:
     knitr,
     rmarkdown

@@ -4,6 +4,7 @@ library(bs4Dash)
 library(shinyWidgets)
 library(reactable)
 library(shinycssloaders)
+library(markdown)
 
 # Core computation
 library(Seurat)
