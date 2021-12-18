@@ -64,26 +64,8 @@ fluidPage(
           style = "fill",
           block = TRUE
         ),
-        tags$br(),
-        fluidRow(
-          column(
-            width = 6,
-            uiOutput("species_selector")
-          ),
-          column(
-            width = 6,
-            uiOutput("organ_selector")
-          )
-        ),
-        actionBttn(
-          inputId = "sample_selection_auto",
-          label = "Load Data",
-          color = "primary",
-          icon = icon("play"),
-          size = "sm",
-          style = "fill",
-          block = TRUE
-        )
+        tags$hr(),
+        uiOutput("species_and_organ_file_input")
       ),
       tabPanel(
         title = "Match Spatial Dataset Manually",

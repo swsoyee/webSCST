@@ -31,6 +31,7 @@ global_data <- reactiveValues(
   "scRNA_filter_1" = NULL,
   "marker" = NULL,
   "show_sc_data_file_input" = TRUE,
+  "show_species_and_organ_file_input" = TRUE,
   "st_marker" = NULL,
   "position_sub_sub" = NULL,
   "stRNA" = NULL,

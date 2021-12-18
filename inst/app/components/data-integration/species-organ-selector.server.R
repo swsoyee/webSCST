@@ -308,6 +308,7 @@ observeEvent(input$load_spatial_dataset_demo, {
     selected = "human"
   )
   global_data$load_species_and_organ_demo <- TRUE
+  global_data$show_species_and_organ_file_input <- FALSE
 
   closeSweetAlert(session = session)
 
@@ -317,4 +318,47 @@ observeEvent(input$load_spatial_dataset_demo, {
     text = "Load human cutaneous dataset finished.",
     type = "success"
   )
+})
+
+output$species_and_organ_file_input <- renderUI({
+  if (global_data$show_species_and_organ_file_input) {
+    tagList(
+      fluidRow(
+        column(
+          width = 6,
+          uiOutput("species_selector")
+        ),
+        column(
+          width = 6,
+          uiOutput("organ_selector")
+        )
+      ),
+      actionBttn(
+        inputId = "sample_selection_auto",
+        label = "Load Data",
+        color = "primary",
+        icon = icon("play"),
+        size = "sm",
+        style = "fill",
+        block = TRUE
+      )
+    )
+  } else {
+    tagList(
+      tags$p("I already know how to use it. Reset and let me choose species and organ."),
+      actionBttn(
+        inputId = "reset_species_and_organ_file_input",
+        label = "Reset",
+        color = "default",
+        icon = icon("redo"),
+        size = "sm",
+        style = "fill",
+        block = "TRUE"
+      )
+    )
+  }
+})
+
+observeEvent(input$reset_species_and_organ_file_input, {
+  global_data$show_species_and_organ_file_input <- TRUE
 })
