@@ -268,7 +268,7 @@ observeEvent(input$load_spatial_dataset_demo, {
     title = "Loading position dataset.",
     value = 40
   )
-  load(position_file_name)
+  position_sub_sub <- readRDS(position_file_name)
   global_data$position_sub_sub <- position_sub_sub
 
   st_file_name <- paste0(
@@ -283,8 +283,8 @@ observeEvent(input$load_spatial_dataset_demo, {
   )
   load(st_file_name)
   embed_umap2 <- data.frame(
-    UMAP_1 = position_sub_sub$x,
-    UMAP_2 = position_sub_sub$y,
+    UMAP_1 = position_sub_sub$row,
+    UMAP_2 = position_sub_sub$col,
     row.names = rownames(position_sub_sub)
   )
   stRNA@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
@@ -345,7 +345,11 @@ output$species_and_organ_file_input <- renderUI({
     )
   } else {
     tagList(
-      tags$p("I already know how to use it. Reset and let me choose species and organ."),
+      "You have loaded the human cutaneous dataset demo. Next go to [ Integration ] to preview the result.",
+      tags$br(),
+      "Click [Reset] to choose species and organ by yourself.",
+      tags$br(),
+      tags$b("But make sure you select the right choice to get the correct integration results."),
       actionBttn(
         inputId = "reset_species_and_organ_file_input",
         label = "Reset",

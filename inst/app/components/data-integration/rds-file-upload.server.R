@@ -234,7 +234,9 @@ output$sc_data_file_input <- renderUI({
     )
   } else {
     tagList(
-      tags$p("I already know how to use it. Reset and upload my own data for analysis."),
+      "You have loaded the clean single-cell dataset demo. Next go to [ Match Spatial Data ] to select species and organ.",
+      tags$br(),
+      "Or reset and upload your own data for analysis.",
       actionBttn(
         inputId = "reset_sc_data_file_input",
         label = "Reset",
