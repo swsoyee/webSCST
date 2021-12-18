@@ -15,6 +15,7 @@ library(patchwork)
 library(ggpubr)
 suppressPackageStartupMessages(library(tidyHeatmap))
 library(GSVA)
+library(RCTD)
 
 global_data <- reactiveValues(
   "show_upload_raw_file_input" = TRUE,

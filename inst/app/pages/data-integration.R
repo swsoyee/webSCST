@@ -172,6 +172,12 @@ fluidPage(
         uiOutput("run_gsva"),
         uiOutput("cell_type_selector_gsva"),
         plotOutput("selected_cell_type_gsva_featureplot")
+      ),
+      tabPanel(
+        title = "RCTD",
+        uiOutput("run_rctd"),
+        tags$br(),
+        uiOutput("download_button_rctd_result")
       )
     )
   )
