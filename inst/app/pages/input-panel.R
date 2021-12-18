@@ -9,6 +9,7 @@ fluidPage(
       title = tagList(
         "Single-cell Sequencing Data Upload"
       ),
+      helpText("Don't know how to get started? You can load our demo to experience it first."),
       fluidRow(
         column(
           width = 6,
@@ -35,22 +36,8 @@ fluidPage(
         )
       ),
       tags$hr(),
-      fileInput(
-        inputId = "upload_matrix_file",
-        label = "Gene expression matrix in mtx format",
-      ),
-      fileInput(
-        inputId = "upload_feature_file",
-        label = "Gene names in tsv format"
-      ),
-      fileInput(
-        inputId = "upload_cell_file",
-        label = "Cell names in tsv format"
-      ),
-      fileInput(
-        inputId = "upload_cell_type_file",
-        label = "Cell type annotation in txt format"
-      ),
+      uiOutput("upload_raw_data_file_input"),
+      tags$hr(),
       uiOutput("create_seurat_object_submit_button")
     ),
     box(

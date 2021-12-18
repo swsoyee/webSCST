@@ -7,6 +7,46 @@ output$upload_data_preview_matrix <- renderUI({
   )
 })
 
+output$upload_raw_data_file_input <- renderUI({
+  if (global_data$show_upload_raw_file_input) {
+    tagList(
+      fileInput(
+        inputId = "upload_matrix_file",
+        label = "Gene expression matrix in mtx format"
+      ),
+      fileInput(
+        inputId = "upload_feature_file",
+        label = "Gene names in tsv format"
+      ),
+      fileInput(
+        inputId = "upload_cell_file",
+        label = "Cell names in tsv format"
+      ),
+      fileInput(
+        inputId = "upload_cell_type_file",
+        label = "Cell type annotation in txt format"
+      )
+    )
+  } else {
+    tagList(
+      tags$p("I already know how to use it. Reset and upload my own data for analysis."),
+      actionBttn(
+        inputId = "reset_upload_raw_data_file_input",
+        label = "Reset",
+        color = "primary",
+        icon = icon("plus"),
+        size = "sm",
+        style = "fill",
+        block = "TRUE"
+      )
+    )
+  }
+})
+
+observeEvent(input$reset_upload_raw_data_file_input, {
+  global_data$show_upload_raw_file_input <- TRUE
+})
+
 observeEvent(input$loading_sample_data, {
   closeAlert(id = "upload_file_alert")
 
@@ -59,6 +99,8 @@ observeEvent(input$loading_sample_data, {
     title = "Loading finished",
     value = 100
   )
+  global_data$show_upload_raw_file_input <- FALSE
+
   closeSweetAlert(session = session)
   show_alert(
     session = session,

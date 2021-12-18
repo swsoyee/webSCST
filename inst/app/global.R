@@ -17,6 +17,7 @@ suppressPackageStartupMessages(library(tidyHeatmap))
 library(GSVA)
 
 global_data <- reactiveValues(
+  "show_upload_raw_file_input" = TRUE,
   "upload_matrix_file" = NULL,
   "upload_feature_file" = NULL,
   "upload_cell_file" = NULL,
