@@ -72,7 +72,9 @@ observeEvent(input$selected_cell_type_strna, {
     })
 
     output$selected_cell_type_strna_featureplot <- renderPlot({
-      FeaturePlot(stRNA, features = feature_name)
+      FeaturePlot(stRNA, features = feature_name) +
+        xlab("ST1") +
+        ylab("ST2")
     })
   }
 })
