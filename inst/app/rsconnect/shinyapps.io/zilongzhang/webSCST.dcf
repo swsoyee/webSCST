@@ -5,9 +5,9 @@ account: zilongzhang
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5337654
-bundleId: 5386129
+bundleId: 5386933
 url: https://zilongzhang.shinyapps.io/webSCST/
-when: 1639773721.53907
-lastSyncTime: 1639773721.53907
+when: 1639794245.78967
+lastSyncTime: 1639794245.78967
 asMultiple: FALSE
 asStatic: FALSE
