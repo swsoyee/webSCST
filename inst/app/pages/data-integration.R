@@ -149,14 +149,14 @@ fluidPage(
             fluidRow(
               column(
                 width = 6,
-                plotOutput("selected_cell_type_strna_violin")
+                uiOutput("selected_cell_type_strna_violin_wrapper")
               ),
               column(
                 width = 6,
-                plotOutput("selected_cell_type_strna_featureplot")
+                uiOutput("selected_cell_type_strna_featureplot_wrapper")
               )
             ),
-            plotOutput("add_module_score_1")
+            uiOutput("add_module_score_1_wrapper")
           ),
           tabPanel(
             title = "Distribution of spatial cell populations in single cells",
@@ -164,14 +164,14 @@ fluidPage(
             fluidRow(
               column(
                 width = 6,
-                plotOutput("selected_cell_type_scrna_violin")
+                uiOutput("selected_cell_type_scrna_violin_wrapper")
               ),
               column(
                 width = 6,
-                plotOutput("selected_cell_type_scrna_featureplot")
+                uiOutput("selected_cell_type_scrna_featureplot_wrapper")
               )
             ),
-            plotOutput("add_module_score_2")
+            uiOutput("add_module_score_2_wrapper")
           )
         ),
       ),
