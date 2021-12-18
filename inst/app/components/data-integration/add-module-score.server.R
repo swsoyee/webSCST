@@ -156,3 +156,21 @@ observeEvent(input$selected_cell_type_scrna, {
     })
   }
 })
+
+output$add_module_score_1 <-
+  output$add_module_score_2 <- renderPlot({
+    if (!is.null(global_data$stRNA) && !is.null(global_data$position_sub_sub)) {
+      stRNA <- global_data$stRNA
+      position_sub_sub <- global_data$position_sub_sub
+      embed_umap2 <- data.frame(
+        UMAP_1 = position_sub_sub$row,
+        UMAP_2 = position_sub_sub$col,
+        row.names = rownames(position_sub_sub)
+      )
+
+      stRNA@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
+      DimPlot(stRNA) +
+        xlab("ST1") +
+        ylab("ST2")
+    }
+  })

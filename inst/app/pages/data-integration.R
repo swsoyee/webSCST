@@ -140,7 +140,8 @@ fluidPage(
                 width = 6,
                 plotOutput("selected_cell_type_strna_featureplot")
               )
-            )
+            ),
+            plotOutput("add_module_score_1")
           ),
           tabPanel(
             title = "Distribution of spatial cell populations in single cells",
@@ -154,7 +155,8 @@ fluidPage(
                 width = 6,
                 plotOutput("selected_cell_type_scrna_featureplot")
               )
-            )
+            ),
+            plotOutput("add_module_score_2")
           )
         ),
       ),
