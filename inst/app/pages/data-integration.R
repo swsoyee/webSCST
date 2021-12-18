@@ -17,6 +17,7 @@ fluidPage(
       tabPanel(
         title = "Upload",
         value = "upload",
+        tags$p("Don't know how to get started? You can load our demo to experience it first."),
         actionBttn(
           inputId = "load_clean_sc_data_demo",
           label = "Load Demo",
@@ -27,28 +28,7 @@ fluidPage(
           block = TRUE
         ),
         tags$hr(),
-        fluidRow(
-          column(
-            width = 6,
-            fileInput(
-              inputId = "upload_seurat_object_file",
-              label = "Dataset (rds)",
-            )
-          ),
-          column(
-            width = 6,
-            fileInput(
-              inputId = "upload_markers_file",
-              label = "Markers (rds)",
-            )
-          )
-        ),
-        fluidRow(
-          column(
-            width = 12,
-            uiOutput("submit_clean_sc_data")
-          )
-        )
+        uiOutput("sc_data_file_input"),
       ),
       tabPanel(
         title = "Load QC Result",

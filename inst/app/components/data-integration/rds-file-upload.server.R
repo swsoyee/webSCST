@@ -195,10 +195,59 @@ observeEvent(input$load_clean_sc_data_demo, {
   )
 
   closeSweetAlert(session = session)
+  global_data$show_sc_data_file_input <- FALSE
+
   show_alert(
     session = session,
     title = "Done",
     text = "Loading dataset finished.",
     type = "success"
   )
+})
+
+output$sc_data_file_input <- renderUI({
+  if (global_data$show_sc_data_file_input) {
+    tagList(
+      "When the data has been uploaded, click [Submit] to pre-process the dataset.",
+      fluidRow(
+        column(
+          width = 6,
+          fileInput(
+            inputId = "upload_seurat_object_file",
+            label = "scRNA dataset (rds)",
+          )
+        ),
+        column(
+          width = 6,
+          fileInput(
+            inputId = "upload_markers_file",
+            label = "Markers (rds)",
+          )
+        )
+      ),
+      fluidRow(
+        column(
+          width = 12,
+          uiOutput("submit_clean_sc_data")
+        )
+      )
+    )
+  } else {
+    tagList(
+      tags$p("I already know how to use it. Reset and upload my own data for analysis."),
+      actionBttn(
+        inputId = "reset_sc_data_file_input",
+        label = "Reset",
+        color = "default",
+        icon = icon("redo"),
+        size = "sm",
+        style = "fill",
+        block = "TRUE"
+      )
+    )
+  }
+})
+
+observeEvent(input$reset_sc_data_file_input, {
+  global_data$show_sc_data_file_input <- TRUE
 })

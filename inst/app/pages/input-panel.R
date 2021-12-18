@@ -9,7 +9,7 @@ fluidPage(
       title = tagList(
         "Single-cell Sequencing Data Upload"
       ),
-      helpText("Don't know how to get started? You can load our demo to experience it first."),
+      tags$p("Don't know how to get started? You can load our demo to experience it first."),
       fluidRow(
         column(
           width = 6,

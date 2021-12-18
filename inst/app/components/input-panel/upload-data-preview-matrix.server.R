@@ -33,8 +33,8 @@ output$upload_raw_data_file_input <- renderUI({
       actionBttn(
         inputId = "reset_upload_raw_data_file_input",
         label = "Reset",
-        color = "primary",
-        icon = icon("plus"),
+        color = "default",
+        icon = icon("redo"),
         size = "sm",
         style = "fill",
         block = "TRUE"

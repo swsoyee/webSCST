@@ -30,6 +30,7 @@ global_data <- reactiveValues(
   "quality_control_process_done" = FALSE,
   "scRNA_filter_1" = NULL,
   "marker" = NULL,
+  "show_sc_data_file_input" = TRUE,
   "st_marker" = NULL,
   "position_sub_sub" = NULL,
   "stRNA" = NULL,
