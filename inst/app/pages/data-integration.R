@@ -26,6 +26,7 @@ fluidPage(
           style = "fill",
           block = TRUE
         ),
+        tags$hr(),
         fluidRow(
           column(
             width = 6,
@@ -74,6 +75,16 @@ fluidPage(
       tabPanel(
         title = "Match Spatial Dataset Automatically",
         value = "match-spatial-dataset-automatically",
+        actionBttn(
+          inputId = "load_spatial_dataset_demo",
+          label = "Load Demo",
+          color = "primary",
+          icon = icon("play"),
+          size = "sm",
+          style = "fill",
+          block = TRUE
+        ),
+        tags$br(),
         fluidRow(
           column(
             width = 6,
@@ -84,7 +95,6 @@ fluidPage(
             uiOutput("organ_selector")
           )
         ),
-        tags$br(),
         actionBttn(
           inputId = "sample_selection_auto",
           label = "Load Data",

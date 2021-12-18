@@ -36,7 +36,8 @@ global_data <- reactiveValues(
   "normalized_done" = FALSE,
   "gsva_stRNA" = NULL,
   "database" = fread("./db/database_list.csv"),
-  "sample_name_of_file" = NULL
+  "sample_name_of_file" = NULL,
+  "load_species_and_organ_demo" = FALSE
 )
 
 species_and_organ_table <- reactive({
