@@ -146,16 +146,22 @@ output$species_selector <- renderUI({
   pickerInput(
     inputId = "species_selector",
     label = "Species",
-    choices = unique(species_and_organ_table()$species)
+    choices = rev(unique(species_and_organ_table()$species))
   )
 })
 
 observeEvent(input$species_selector, {
   output$organ_selector <- renderUI({
+    selected <- NULL
+    if (global_data$load_species_and_organ_demo) {
+      selected <- "cutaneous"
+    }
+
     pickerInput(
       inputId = "organ_selector",
       label = "Organ",
-      choices = unique(species_and_organ_table()[species == input$species_selector, ]$organ)
+      choices = unique(species_and_organ_table()[species == input$species_selector, ]$organ),
+      selected = selected
     )
   })
 })
@@ -238,6 +244,77 @@ observeEvent(input$sample_selection_auto, {
     session = session,
     title = "Done",
     text = "Loading dataset finished.",
+    type = "success"
+  )
+})
+
+observeEvent(input$load_spatial_dataset_demo, {
+  progressSweetAlert(
+    session = session,
+    id = "loading-background-dataset",
+    title = "Loading dataset...",
+    display_pct = TRUE,
+    value = 10,
+  )
+
+  database_path <- "./db/"
+  position_file_name <- paste0(
+    database_path,
+    "position_example.Rds"
+  )
+  updateProgressBar(
+    session = session,
+    id = "loading-background-dataset",
+    title = "Loading position dataset.",
+    value = 40
+  )
+  load(position_file_name)
+  global_data$position_sub_sub <- position_sub_sub
+
+  st_file_name <- paste0(
+    database_path,
+    "stRNA_example.Rds"
+  )
+  updateProgressBar(
+    session = session,
+    id = "loading-background-dataset",
+    title = "Loading stRNA dataset.",
+    value = 60
+  )
+  load(st_file_name)
+  embed_umap2 <- data.frame(
+    UMAP_1 = position_sub_sub$x,
+    UMAP_2 = position_sub_sub$y,
+    row.names = rownames(position_sub_sub)
+  )
+  stRNA@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
+  global_data$stRNA <- stRNA
+
+  updateProgressBar(
+    session = session,
+    id = "loading-background-dataset",
+    title = "Loading marker dataset.",
+    value = 80
+  )
+  marker_file_name <- paste0(
+    database_path,
+    "st_marker_example.Rds"
+  )
+  global_data$st_marker <- readRDS(marker_file_name)
+
+  updatePickerInput(
+    session,
+    inputId = "species_selector",
+    selected = "human"
+  )
+  global_data$load_species_and_organ_demo <- TRUE
+
+  closeSweetAlert(session = session)
+
+  show_alert(
+    session = session,
+    title = "Done",
+    text = "Load human cutaneous dataset finished.",
     type = "success"
   )
 })
