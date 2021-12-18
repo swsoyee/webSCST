@@ -63,7 +63,7 @@ observeEvent(input$show_details, {
 
   dataset_files_name <- grep(paste0("^", dataset_id, "_.+\\.Rds"), list.files("./db"), value = TRUE)
 
-  rm_prefix_files_name <- gsub("^.+[position|st]_", "", dataset_files_name)
+  rm_prefix_files_name <- gsub("^.+[position|st|marker]_", "", dataset_files_name)
 
   choices <- unique(gsub(".Rds$", "", rm_prefix_files_name))
   choices <- choices[order(nchar(choices), choices)]
