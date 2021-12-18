@@ -335,9 +335,9 @@ output$species_and_organ_file_input <- renderUI({
       ),
       actionBttn(
         inputId = "sample_selection_auto",
-        label = "Load Data",
+        label = "Submit",
         color = "primary",
-        icon = icon("play"),
+        icon = icon("check-circle"),
         size = "sm",
         style = "fill",
         block = TRUE

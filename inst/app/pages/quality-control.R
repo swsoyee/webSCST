@@ -11,7 +11,7 @@ fluidPage(
       ),
       maximizable = TRUE,
       title = tagList(
-        "Violin Plot and Feature Scatter"
+        "1. Violin Plot and Feature Scatter"
       ),
       fluidRow(
         column(
@@ -82,7 +82,7 @@ fluidPage(
       maximizable = TRUE,
       status = "primary",
       title = tagList(
-        "Normailization and Scaling"
+        "2. Normailization and Scaling"
       ),
       fluidRow(
         column(
@@ -135,7 +135,7 @@ fluidPage(
       id = "clustering",
       width = 12,
       title = tagList(
-        "Clustering"
+        "3. Clustering"
       ),
       label = boxLabel(
         "Step 3",

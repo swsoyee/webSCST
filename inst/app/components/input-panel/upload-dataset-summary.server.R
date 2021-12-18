@@ -9,7 +9,7 @@ output$create_seurat_object_submit_button <- renderUI({
       inputId = "create_seurat_object",
       label = "Submit",
       color = "primary",
-      icon = icon("play"),
+      icon = icon("check-circle"),
       size = "sm",
       style = "fill",
       block = "TRUE"

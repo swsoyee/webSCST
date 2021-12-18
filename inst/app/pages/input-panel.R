@@ -16,7 +16,7 @@ fluidPage(
           actionBttn(
             inputId = "loading_sample_data",
             label = "Load Demo",
-            color = "primary",
+            color = "success",
             icon = icon("play"),
             size = "sm",
             style = "fill",
@@ -28,7 +28,7 @@ fluidPage(
           downloadBttn(
             outputId = "download_demo_dataset",
             label = "Download Demo",
-            color = "primary",
+            color = "success",
             size = "sm",
             style = "fill",
             block = "TRUE"

@@ -4,7 +4,7 @@ output$submit_clean_sc_data <- renderUI({
       inputId = "submit_rds_file",
       label = "Submit",
       color = "primary",
-      icon = icon("play"),
+      icon = icon("check-circle"),
       size = "sm",
       style = "fill",
       block = TRUE

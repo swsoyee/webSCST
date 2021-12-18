@@ -6,7 +6,7 @@ fluidPage(
       solidHeader = TRUE,
       status = "primary",
       title = tagList(
-        "Load Clean Single-cell Data"
+        "1. Load Clean Single-cell Data"
       ),
       label = boxLabel(
         "Step 1",
@@ -15,7 +15,10 @@ fluidPage(
       side = "right",
       type = "tabs",
       tabPanel(
-        title = "Upload",
+        title = tagList(
+          icon("upload"),
+          "Upload"
+        ),
         value = "upload",
         "Don't know how to get started? You can load our demo to experience it first.",
         tags$br(),
@@ -37,7 +40,7 @@ fluidPage(
         actionBttn(
           inputId = "load_clean_sc_data_demo",
           label = "Load Demo",
-          color = "primary",
+          color = "success",
           icon = icon("play"),
           size = "sm",
           style = "fill",
@@ -47,7 +50,10 @@ fluidPage(
         uiOutput("sc_data_file_input"),
       ),
       tabPanel(
-        title = "Load QC Result",
+        title = tagList(
+          icon("history"),
+          "Load QC Result"
+        ),
         value = "load-qc-result",
         uiOutput("load_qc_result")
       )
@@ -57,7 +63,7 @@ fluidPage(
     tabBox(
       id = "choose-species-and-organ",
       title = tagList(
-        "Match Spatial Data"
+        "2. Match Spatial Data"
       ),
       solidHeader = TRUE,
       status = "primary",
@@ -69,13 +75,16 @@ fluidPage(
       ),
       width = 12,
       tabPanel(
-        title = "Match Spatial Dataset Automatically",
+        title = tagList(
+          icon("robot"),
+          "Match Spatial Dataset Automatically"
+        ),
         value = "match-spatial-dataset-automatically",
         tags$p("The DEMO data here is a matched spatail data as an example."),
         actionBttn(
           inputId = "load_spatial_dataset_demo",
           label = "Load Demo",
-          color = "primary",
+          color = "success",
           icon = icon("play"),
           size = "sm",
           style = "fill",
@@ -92,15 +101,18 @@ fluidPage(
         uiOutput("species_and_organ_file_input")
       ),
       tabPanel(
-        title = "Match Spatial Dataset Manually",
+        title = tagList(
+          icon("tasks"),
+          "Match Spatial Dataset Manually"
+        ),
         value = "match-spatial-dataset-manually",
         reactableOutput("species_and_organ_selector_table"),
         tags$hr(),
         actionBttn(
           inputId = "sample_selection",
-          label = "Load Data",
+          label = "Submit",
           color = "primary",
-          icon = icon("play"),
+          icon = icon("check-circle"),
           size = "sm",
           style = "fill",
           block = TRUE
@@ -113,7 +125,7 @@ fluidPage(
       id = "data-integration-method-and-result",
       width = 12,
       title = tagList(
-        "Integration"
+        "3. Integration"
       ),
       label = boxLabel(
         "Step 3",
@@ -126,7 +138,10 @@ fluidPage(
       status = "primary",
       type = "tabs",
       tabPanel(
-        title = "AddModuleScore",
+        title = tagList(
+          icon("medal"),
+          "AddModuleScore"
+        ),
         tabsetPanel(
           tabPanel(
             title = "Spatial Location of Single-cell Data",
@@ -161,20 +176,29 @@ fluidPage(
         ),
       ),
       tabPanel(
-        title = "Multimodal intersection analysis (MIA)",
+        title = tagList(
+          icon("compress-arrows-alt"),
+          "Multimodal intersection analysis (MIA)"
+        ),
         uiOutput("run_mia"),
         tags$hr(),
         plotOutput("mia_heatmap"),
         plotOutput("mia_dimplot")
       ),
       tabPanel(
-        title = "ssGSEA",
+        title = tagList(
+          icon("buromobelexperte"),
+          "ssGSEA"
+        ),
         uiOutput("run_gsva"),
         uiOutput("cell_type_selector_gsva"),
         plotOutput("selected_cell_type_gsva_featureplot")
       ),
       tabPanel(
-        title = "RCTD",
+        title = tagList(
+          icon("expand-arrows-alt"),
+          "RCTD"
+        ),
         uiOutput("run_rctd"),
         tags$br(),
         uiOutput("download_button_rctd_result")
