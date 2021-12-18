@@ -17,7 +17,23 @@ fluidPage(
       tabPanel(
         title = "Upload",
         value = "upload",
-        tags$p("Don't know how to get started? You can load our demo to experience it first."),
+        "Don't know how to get started? You can load our demo to experience it first.",
+        tags$br(),
+        "The demo here is obtained after the ",
+        actionLink(
+          inputId = "go_to_qc_from_sc_demo",
+          label = "Quality Control",
+          icon = icon("clipboard-check")
+        ),
+        " of the previous steps using the original dataset in ",
+        actionLink(
+          inputId = "go_to_file_upload_from_sc_demo",
+          label = "File Upload",
+          icon = icon("upload")
+        ),
+        " Tab.",
+        tags$br(),
+        tags$br(),
         actionBttn(
           inputId = "load_clean_sc_data_demo",
           label = "Load Demo",

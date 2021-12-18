@@ -253,3 +253,19 @@ output$sc_data_file_input <- renderUI({
 observeEvent(input$reset_sc_data_file_input, {
   global_data$show_sc_data_file_input <- TRUE
 })
+
+observeEvent(input$go_to_file_upload_from_sc_demo, {
+  updateTabItems(
+    session,
+    "main_sidebar",
+    selected = "file-upload"
+  )
+})
+
+observeEvent(input$go_to_qc_from_sc_demo, {
+  updateTabItems(
+    session,
+    "main_sidebar",
+    selected = "quality_control"
+  )
+})
