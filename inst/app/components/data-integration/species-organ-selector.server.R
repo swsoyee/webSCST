@@ -366,3 +366,11 @@ output$species_and_organ_file_input <- renderUI({
 observeEvent(input$reset_species_and_organ_file_input, {
   global_data$show_species_and_organ_file_input <- TRUE
 })
+
+observeEvent(input$go_to_match_spatial_dataset_manually, {
+  updateTabItems(
+    session,
+    "choose-species-and-organ",
+    selected = "match-spatial-dataset-manually"
+  )
+})

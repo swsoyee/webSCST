@@ -55,6 +55,7 @@ fluidPage(
       tabPanel(
         title = "Match Spatial Dataset Automatically",
         value = "match-spatial-dataset-automatically",
+        tags$p("The DEMO data here is a matched spatail data as an example."),
         actionBttn(
           inputId = "load_spatial_dataset_demo",
           label = "Load Demo",
@@ -65,11 +66,18 @@ fluidPage(
           block = TRUE
         ),
         tags$hr(),
+        "You could match your own spatial data automatically by choose species and organs or mannually select any replicate you liked in our ",
+        actionLink(
+          inputId = "go_to_match_spatial_dataset_manually",
+          label = "database"
+        ),
+        ".",
+        tags$br(),
         uiOutput("species_and_organ_file_input")
       ),
       tabPanel(
         title = "Match Spatial Dataset Manually",
-        value = "match-spatial-dataset-menually",
+        value = "match-spatial-dataset-manually",
         reactableOutput("species_and_organ_selector_table"),
         tags$hr(),
         actionBttn(
