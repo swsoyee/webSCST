@@ -28,7 +28,8 @@ Imports:
     GSVA,
     tidyHeatmap,
     patchwork,
-    markdown
+    markdown,
+    RCTD
 Suggests:
     knitr,
     rmarkdown
