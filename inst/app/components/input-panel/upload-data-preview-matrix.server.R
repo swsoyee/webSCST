@@ -116,3 +116,10 @@ observeEvent(input$upload_matrix_file, {
 
   closeSweetAlert(session = session)
 })
+
+output$download_demo_dataset <- downloadHandler(
+  filename = "Demo.zip",
+  content = function(file) {
+    file.copy("www/demo.zip", file)
+  }
+)

@@ -9,14 +9,30 @@ fluidPage(
       title = tagList(
         "Single-cell Sequencing Data Upload"
       ),
-      actionBttn(
-        inputId = "loading_sample_data",
-        label = "Load Demo",
-        color = "primary",
-        icon = icon("play"),
-        size = "sm",
-        style = "fill",
-        block = "TRUE"
+      fluidRow(
+        column(
+          width = 6,
+          actionBttn(
+            inputId = "loading_sample_data",
+            label = "Load Demo",
+            color = "primary",
+            icon = icon("play"),
+            size = "sm",
+            style = "fill",
+            block = "TRUE"
+          )
+        ),
+        column(
+          width = 6,
+          downloadBttn(
+            outputId = "download_demo_dataset",
+            label = "Download Demo",
+            color = "primary",
+            size = "sm",
+            style = "fill",
+            block = "TRUE"
+          )
+        )
       ),
       tags$hr(),
       fileInput(
