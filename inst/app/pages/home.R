@@ -17,7 +17,7 @@ fluidPage(
         tags$br(),
         tags$h1("What is webSCST?"),
         tags$hr(),
-        "webSCST is the first web service for single-cell RNA-seq data and spatial transcriptome integration. The user-friendly interactive interface provides three main functions:",
+        "webSCST is the first web tool for single-cell RNA-seq data and spatial transcriptome integration. The user-friendly interactive interface provides three main functions:",
         actionLink(
           inputId = "sc_data_uploading_and_processing",
           label = "single-cell data uploading and processing",
