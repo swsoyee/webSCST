@@ -119,7 +119,12 @@ output$selected_cell_type_gsea_featureplot_wrapper <- renderUI({
   if (!is.null(global_data$marker) && global_data$gsva_done) {
     tagList(
       plotOutput("selected_cell_type_gsea_featureplot"),
-      tags$p("The spatail gene expression information for the specific cell-type users select.")
+      bs4Callout(
+        title = "",
+        width = 12,
+        status = "info",
+        "The spatail gene expression information for the specific cell-type you select."
+      )
     )
   }
 })

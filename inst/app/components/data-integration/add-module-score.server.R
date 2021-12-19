@@ -83,7 +83,12 @@ output$selected_cell_type_strna_violin_wrapper <- renderUI({
   if (!is.null(global_data$marker) && !is.null(global_data$stRNA)) {
     tagList(
       plotOutput("selected_cell_type_strna_violin"),
-      tags$p("Violin plot shows the gene expression distribution of spatail clusters for the specific cell-type users select.")
+      bs4Callout(
+        title = "",
+        width = 12,
+        status = "info",
+        "Violin plot shows the gene expression distribution of spatail clusters for the specific cell-type you select."
+      )
     )
   }
 })
@@ -92,7 +97,12 @@ output$selected_cell_type_strna_featureplot_wrapper <- renderUI({
   if (!is.null(global_data$marker) && !is.null(global_data$stRNA)) {
     tagList(
       plotOutput("selected_cell_type_strna_featureplot"),
-      tags$p("The spatail gene expression for the specific cell-type users select.")
+      bs4Callout(
+        title = "",
+        width = 12,
+        status = "info",
+        "The spatail gene expression for the specific cell-type you select."
+      )
     )
   }
 })
@@ -181,7 +191,12 @@ output$selected_cell_type_scrna_violin_wrapper <- renderUI({
   if (!is.null(global_data$st_marker) && !is.null(global_data$scRNA_filter_1)) {
     tagList(
       plotOutput("selected_cell_type_scrna_violin"),
-      tags$p("Violin plot shows the gene expression distribution of cell types for the specific spatail cluster users select.")
+      bs4Callout(
+        title = "",
+        width = 12,
+        status = "info",
+        "Violin plot shows the gene expression distribution of cell types for the specific spatail cluster you select."
+      )
     )
   }
 })
@@ -190,7 +205,12 @@ output$selected_cell_type_scrna_featureplot_wrapper <- renderUI({
   if (!is.null(global_data$st_marker) && !is.null(global_data$scRNA_filter_1)) {
     tagList(
       plotOutput("selected_cell_type_scrna_featureplot"),
-      tags$p("The single-cell UMAP plot shows gene expression for the specific spatail cluster users select.")
+      bs4Callout(
+        title = "",
+        width = 12,
+        status = "info",
+        "The single-cell UMAP plot shows gene expression for the specific spatail cluster you select."
+      )
     )
   }
 })
@@ -217,7 +237,12 @@ output$add_module_score_1_wrapper <- renderUI({
   if (!is.null(global_data$stRNA) && !is.null(global_data$position_sub_sub)) {
     tagList(
       plotOutput("add_module_score_1"),
-      tags$p("The clustering results for spatial transcriptome sequencing data.")
+      bs4Callout(
+        title = "",
+        width = 12,
+        status = "info",
+        "The clustering results for spatial transcriptome sequencing data."
+      )
     )
   }
 })
@@ -227,7 +252,12 @@ output$add_module_score_2_wrapper <- renderUI({
   if (!is.null(global_data$stRNA) && !is.null(global_data$position_sub_sub)) {
     tagList(
       plotOutput("add_module_score_2"),
-      tags$p("The clustering results for spatial transcriptome sequencing data.")
+      bs4Callout(
+        title = "",
+        width = 12,
+        status = "info",
+        "The clustering results for spatial transcriptome sequencing data."
+      )
     )
   }
 })

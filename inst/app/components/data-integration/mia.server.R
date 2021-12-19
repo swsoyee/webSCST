@@ -121,9 +121,19 @@ observeEvent(input$run_mia, {
     if (!is.null(global_data$stRNA) && !is.null(global_data$position_sub_sub)) {
       tagList(
         plotOutput("mia_heatmap"),
-        tags$p("The heatmap shows the gene expression for each cell type in each spatial cluster."),
+        bs4Callout(
+          title = "",
+          width = 12,
+          status = "info",
+          "The heatmap shows the gene expression for each cell type in each spatial cluster."
+        ),
         plotOutput("mia_dimplot"),
-        tags$p("The clustering results for spatial transcriptome sequencing data.")
+        bs4Callout(
+          title = "",
+          width = 12,
+          status = "info",
+          "The clustering results for spatial transcriptome sequencing data."
+        )
       )
     }
   })
