@@ -182,8 +182,7 @@ fluidPage(
         ),
         uiOutput("run_mia"),
         tags$hr(),
-        plotOutput("mia_heatmap"),
-        plotOutput("mia_dimplot")
+        uiOutput("mia_plot_wrapper")
       ),
       tabPanel(
         title = tagList(

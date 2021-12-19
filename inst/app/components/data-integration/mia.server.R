@@ -115,3 +115,16 @@ observeEvent(input$run_mia, {
     })
   }
 })
+
+observeEvent(input$run_mia, {
+  output$mia_plot_wrapper <- renderUI({
+    if (!is.null(global_data$stRNA) && !is.null(global_data$position_sub_sub)) {
+      tagList(
+        plotOutput("mia_heatmap"),
+        tags$p("The heatmap shows the gene expression for each cell type in each spatial cluster."),
+        plotOutput("mia_dimplot"),
+        tags$p("The clustering results for spatial transcriptome sequencing data.")
+      )
+    }
+  })
+})
