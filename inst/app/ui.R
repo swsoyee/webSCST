@@ -76,7 +76,7 @@ shinyUI(
     ),
     footer = dashboardFooter(
       left = tagList(
-        "Copyright © 2021, ",
+        "Copyright (c) 2021, ",
         tags$a(
           href = "http://lab.malab.cn/~zq/en/index.html",
           "MAchine Learning And Bioinformatics (MALAB), "
