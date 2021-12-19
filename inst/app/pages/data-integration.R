@@ -192,7 +192,7 @@ fluidPage(
         ),
         uiOutput("run_gsva"),
         uiOutput("cell_type_selector_gsva"),
-        plotOutput("selected_cell_type_gsva_featureplot")
+        uiOutput("selected_cell_type_gsea_featureplot_wrapper")
       ),
       tabPanel(
         title = tagList(

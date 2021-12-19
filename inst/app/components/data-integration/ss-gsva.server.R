@@ -108,9 +108,18 @@ observeEvent(input$run_gsva, {
 })
 
 observeEvent(input$selected_cell_type_gsva, {
-  output$selected_cell_type_gsva_featureplot <- renderPlot({
+  output$selected_cell_type_gsea_featureplot <- renderPlot({
     stRNA <- global_data$gsva_stRNA
 
     FeaturePlot(stRNA, features = input$selected_cell_type_gsva)
   })
+})
+
+output$selected_cell_type_gsea_featureplot_wrapper <- renderUI({
+  if (!is.null(global_data$marker) && global_data$gsva_done) {
+    tagList(
+      plotOutput("selected_cell_type_gsea_featureplot"),
+      tags$p("The spatail gene expression information for the specific cell-type users select.")
+    )
+  }
 })
