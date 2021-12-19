@@ -138,6 +138,42 @@ observeEvent(input$apply_quality_control_normalize, {
       block = TRUE
     )
   })
+
+  output$clustering_box <- renderUI({
+    box(
+      id = "clustering",
+      width = 12,
+      title = tagList(
+        "3. Clustering"
+      ),
+      label = boxLabel(
+        "Step 3",
+        status = "white"
+      ),
+      solidHeader = TRUE,
+      collapsed = TRUE,
+      maximizable = TRUE,
+      status = "primary",
+      withSpinner(plotOutput("clustering_pca")),
+      sliderInput(
+        inputId = "pc_num",
+        label = "PC Number",
+        min = 1,
+        max = 30,
+        value = 15
+      ),
+      fluidRow(
+        column(
+          width = 6,
+          withSpinner(plotOutput("clustering_tsne"))
+        ),
+        column(
+          width = 6,
+          withSpinner(plotOutput("clustering_umap"))
+        )
+      )
+    )
+  })
 })
 
 observeEvent(input$go_to_quality_control_clustering, {
@@ -307,3 +343,14 @@ output$find_marker_and_save <- downloadHandler(
     closeSweetAlert(session = session)
   }
 )
+
+observeEvent(input$go_to_quality_control_clustering, {
+  updateBox(
+    id = "normailization_and_scaling",
+    action = "toggle"
+  )
+  updateBox(
+    id = "clustering",
+    action = "toggle"
+  )
+})
