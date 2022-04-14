@@ -73,9 +73,7 @@ observeEvent(input$run_rctd, {
   cell_type_names <- myRCTD@cell_type_info$info[[2]]
   spatialRNA <- myRCTD@spatialRNA
 
-  resultsdir <- "RCTD_Plots"
-  dir.create(resultsdir)
-
+  resultsdir <- tempdir(check=TRUE)
   # make the plots
   # Plots the confident weights for each cell type as in full_mode (saved as
   # 'results/cell_type_weights_unthreshold.pdf')
@@ -95,8 +93,13 @@ observeEvent(input$run_rctd, {
 
   plot_cond_occur(cell_type_names, resultsdir, norm_weights, spatialRNA)
 
-  files2zip <- dir(resultsdir, full.names = TRUE)
-  zip(zipfile = "RCTD_result", files = files2zip)
+  zip_file_path <- paste0(resultsdir, "/RCTD_result")
+
+  current_wd <- getwd()
+  setwd(resultsdir)
+  files2zip <- dir(".", pattern=".pdf", full.names = TRUE)
+  zip(zipfile = zip_file_path, files = files2zip)
+  setwd(current_wd)
 
   closeSweetAlert(session = session)
 
@@ -105,7 +108,7 @@ observeEvent(input$run_rctd, {
       "RCTD_result.zip"
     },
     content = function(file) {
-      file.copy("RCTD_result.zip", file)
+      file.copy(paste0(zip_file_path, ".zip"), file)
     }
   )
 
