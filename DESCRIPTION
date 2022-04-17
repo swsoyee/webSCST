@@ -29,7 +29,8 @@ Imports:
     tidyHeatmap,
     patchwork,
     markdown,
-    RCTD
+    RCTD,
+    qpdf,
 Suggests:
     knitr,
     rmarkdown
