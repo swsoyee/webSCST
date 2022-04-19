@@ -30,14 +30,14 @@ shinyUI(
         ),
         menuItemOutput("show_quality_control"),
         menuItem(
-          text = "Data Integration",
-          tabName = "data-integration",
-          icon = icon("object-group")
-        ),
-        menuItem(
           text = "Database",
           tabName = "database",
           icon = icon("database")
+        ),
+        menuItem(
+          text = "Data Integration",
+          tabName = "data-integration",
+          icon = icon("object-group")
         ),
         menuItem(
           text = "About",
