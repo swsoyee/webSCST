@@ -97,13 +97,49 @@ output$seurat_object_summary_pie <- renderPlot({
         title = "Pie Chart of cell types"
       )
 
-    pie + coord_polar(theta = "y", start = 0)
+    p <- pie + coord_polar(theta = "y", start = 0)
+    seurat_object_summary_pie_chart$plot <- p
+
+    p
   }
 })
 
+seurat_object_summary_pie_chart <- reactiveValues()
+
+output$download_data_preview_pie_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-data-summary-pie.png"),
+  content = function(file) {
+    ggsave(file, plot = seurat_object_summary_pie_chart$plot)
+  }
+)
+
+output$download_data_preview_pie_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-data-summary-pie.pdf"),
+  content = function(file) {
+    ggsave(file, plot = seurat_object_summary_pie_chart$plot, device = "pdf")
+  }
+)
+
 output$seurat_object_summary_pie_wrapper <- renderUI({
   if (!is.null(global_data$scRNA)) {
-    plotOutput("seurat_object_summary_pie")
+    tagList(
+      fluidRow(
+        downloadBttn(
+          outputId = "download_data_preview_pie_png",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_data_preview_pie_pdf",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
+      plotOutput("seurat_object_summary_pie")
+    )
   } else {
     plotOutput("seurat_object_summary_pie", height = "1px")
   }
