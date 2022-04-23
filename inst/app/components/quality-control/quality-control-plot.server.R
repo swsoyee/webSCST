@@ -31,7 +31,7 @@ output$quality_control_violin_plot <- renderPlot({
   if (global_data$quality_control_process_done) {
     col.num <- length(levels(global_data$scRNA_filter_1@active.ident))
 
-    VlnPlot(
+    p <- VlnPlot(
       global_data$scRNA_filter_1,
       features = c("nFeature_RNA", "nCount_RNA", "percent.mt", "percent.HB"),
       cols = rainbow(col.num),
@@ -43,8 +43,27 @@ output$quality_control_violin_plot <- renderPlot({
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank()
       )
+
+    quality_control_violin_plot$plot <- p
+    p
   }
 })
+
+quality_control_violin_plot <- reactiveValues()
+
+output$download_quality_control_violin_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-violin.png"),
+  content = function(file) {
+    ggsave(file, plot = quality_control_violin_plot$plot)
+  }
+)
+
+output$download_quality_control_violin_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-violin.pdf"),
+  content = function(file) {
+    ggsave(file, plot = quality_control_violin_plot$plot, device = "pdf")
+  }
+)
 
 output$quality_control_feature_scatter <- renderPlot({
   if (global_data$quality_control_process_done) {
