@@ -72,6 +72,21 @@ fluidPage(
         ),
       ),
       withSpinner(plotOutput("quality_control_violin_plot")),
+      fluidRow(
+        downloadBttn(
+          outputId = "download_quality_control_feature_scatter_plot_png",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_quality_control_feature_scatter_plot_pdf",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
       withSpinner(plotOutput("quality_control_feature_scatter")),
       actionBttn(
         inputId = "go_to_quality_control_normalization",

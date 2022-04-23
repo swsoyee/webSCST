@@ -71,9 +71,28 @@ output$quality_control_feature_scatter <- renderPlot({
     p1 <- FeatureScatter(scRNA, feature1 = "nCount_RNA", feature2 = "percent.mt")
     p2 <- FeatureScatter(scRNA, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
     p3 <- FeatureScatter(scRNA, feature1 = "nCount_RNA", feature2 = "percent.HB")
-    p1 + p2 + p3 + plot_layout(ncol = 3) & theme(legend.position = "none")
+    p <- p1 + p2 + p3 + plot_layout(ncol = 3) & theme(legend.position = "none")
+    
+    quality_control_feature_scatter_plot$plot <- p
+    p
   }
 })
+
+quality_control_feature_scatter_plot <- reactiveValues()
+
+output$download_quality_control_feature_scatter_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-feature-scatter-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = quality_control_feature_scatter_plot$plot)
+  }
+)
+
+output$download_quality_control_feature_scatter_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-feature-scatter-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = quality_control_feature_scatter_plot$plot, device = "pdf")
+  }
+)
 
 output$quality_control_plot_description <- renderText({
   # it will take too much time when using `all.equal` to do the comparison
