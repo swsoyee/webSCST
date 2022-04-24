@@ -200,6 +200,22 @@ output$normalization_plot_wrapper <- renderUI({
   }
 })
 
+clustering_plot <- reactiveValues()
+
+output$download_clustering_pca_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-clustering-pca-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = clustering_plot$pca_plot)
+  }
+)
+
+output$download_clustering_pca_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-clustering-pca-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = clustering_plot$pca_plot, device = "pdf")
+  }
+)
+
 observeEvent(input$apply_quality_control_normalize, {
   output$go_to_quality_control_clustering <- renderUI({
     actionBttn(
@@ -228,6 +244,21 @@ observeEvent(input$apply_quality_control_normalize, {
       collapsed = TRUE,
       maximizable = TRUE,
       status = "primary",
+      fluidRow(
+        downloadBttn(
+          outputId = "download_clustering_pca_plot_png",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_clustering_pca_plot_pdf",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
       withSpinner(plotOutput("clustering_pca")),
       sliderInput(
         inputId = "pc_num",
@@ -274,7 +305,9 @@ output$clustering_pca <- renderPlot({
       plot2 <- ElbowPlot(scRNA, ndims = 20, reduction = "pca")
       global_data$scRNA_filter_1 <- scRNA
 
-      plot1 + plot2
+      p <- plot1 + plot2
+      clustering_plot$pca_plot <- p
+      p
     }
   })
 })
