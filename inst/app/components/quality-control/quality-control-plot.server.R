@@ -270,10 +270,42 @@ observeEvent(input$apply_quality_control_normalize, {
       fluidRow(
         column(
           width = 6,
+          fluidRow(
+            downloadBttn(
+              outputId = "download_clustering_tsne_plot_png",
+              label = "PNG",
+              size = "sm",
+              style = "fill"
+            ),
+            HTML("&nbsp;"),
+            downloadBttn(
+              outputId = "download_clustering_tsne_plot_pdf",
+              label = "PDF",
+              size = "sm",
+              style = "fill"
+            ),
+          ),
+          tags$br(),
           withSpinner(plotOutput("clustering_tsne"))
         ),
         column(
           width = 6,
+          fluidRow(
+            downloadBttn(
+              outputId = "download_clustering_umap_plot_png",
+              label = "PNG",
+              size = "sm",
+              style = "fill"
+            ),
+            HTML("&nbsp;"),
+            downloadBttn(
+              outputId = "download_clustering_umap_plot_pdf",
+              label = "PDF",
+              size = "sm",
+              style = "fill"
+            ),
+          ),
+          tags$br(),
           withSpinner(plotOutput("clustering_umap"))
         )
       )
@@ -355,7 +387,10 @@ output$clustering_tsne <- renderPlot({
       global_data$scRNA_filter_1 <- scRNA
 
       closeSweetAlert(session = session)
-      DimPlot(scRNA, reduction = "tsne", label = T)
+      p <- DimPlot(scRNA, reduction = "tsne", label = T)
+
+      clustering_plot$tsne_plot <- p
+      p
     }
   })
 })
@@ -389,10 +424,38 @@ output$clustering_umap <- renderPlot({
       global_data$scRNA_filter_1 <- scRNA
 
       closeSweetAlert(session = session)
-      DimPlot(scRNA, reduction = "umap", label = T)
+      p <- DimPlot(scRNA, reduction = "umap", label = T)
+
+      clustering_plot$umap_plot <- p
+      p
     }
   })
 })
+
+output$download_clustering_tsne_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-clustering-tsne-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = clustering_plot$tsne_plot)
+  }
+)
+output$download_clustering_tsne_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-clustering-tsne-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = clustering_plot$tsne_plot, device = "pdf")
+  }
+)
+output$download_clustering_umap_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-clustering-umap-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = clustering_plot$umap_plot)
+  }
+)
+output$download_clustering_umap_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-clustering-umap-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = clustering_plot$umap_plot, device = "pdf")
+  }
+)
 
 output$save_object_as_rds <- downloadHandler(
   filename = function() {
