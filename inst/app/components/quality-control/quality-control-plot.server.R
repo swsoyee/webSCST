@@ -72,7 +72,7 @@ output$quality_control_feature_scatter <- renderPlot({
     p2 <- FeatureScatter(scRNA, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
     p3 <- FeatureScatter(scRNA, feature1 = "nCount_RNA", feature2 = "percent.HB")
     p <- p1 + p2 + p3 + plot_layout(ncol = 3) & theme(legend.position = "none")
-    
+
     quality_control_feature_scatter_plot$plot <- p
     p
   }
@@ -151,16 +151,52 @@ output$normalization_plot <- renderPlot({
       scale.genes <- rownames(scRNA)
       scRNA <- ScaleData(scRNA, features = scale.genes)
       global_data$scRNA_filter_1 <- scRNA
-      plot1 + plot2 + plot_layout(ncol = 2) & theme(legend.position = "bottom")
+      p <- plot1 + plot2 + plot_layout(ncol = 2) & theme(legend.position = "bottom")
+      normalization_plot$plot <- p
+      p
     }
   })
 })
+
+normalization_plot <- reactiveValues()
+
+output$download_normalization_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-normalization-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = normalization_plot$plot)
+  }
+)
+
+output$download_normalization_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-quality-control-normalization-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = normalization_plot$plot, device = "pdf")
+  }
+)
 
 output$normalization_plot_wrapper <- renderUI({
   if (input$apply_quality_control_normalize == 0) {
     return()
   } else {
-    withSpinner(plotOutput("normalization_plot"))
+    tagList(
+      fluidRow(
+        downloadBttn(
+          outputId = "download_normalization_plot_png",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_normalization_plot_pdf",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
+      tags$br(),
+      withSpinner(plotOutput("normalization_plot"))
+    )
   }
 })
 
