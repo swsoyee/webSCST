@@ -36,6 +36,8 @@ output$cell_type_selector_scrna <- renderUI({
   }
 })
 
+add_module_score <- reactiveValues()
+
 observeEvent(input$selected_cell_type_strna, {
   if (!is.null(global_data$marker) && !is.null(global_data$stRNA)) {
     sc.marker <- global_data$marker
@@ -63,25 +65,58 @@ observeEvent(input$selected_cell_type_strna, {
     feature_name <- paste0(name, "1")
 
     output$selected_cell_type_strna_violin <- renderPlot({
-      ggviolin(
+      p <- ggviolin(
         data = stRNA@meta.data,
         x = "SCT_snn_res.0.8",
         y = feature_name,
         fill = "SCT_snn_res.0.8"
       )
+      add_module_score$violin_plot <- p
+      p
     })
 
     output$selected_cell_type_strna_featureplot <- renderPlot({
-      FeaturePlot(stRNA, features = feature_name) +
+      p <- FeaturePlot(stRNA, features = feature_name) +
         xlab("ST1") +
         ylab("ST2")
+      add_module_score$feature_plot <- p
+      p
     })
   }
 })
 
+output$download_add_module_score_violin_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-violin-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = add_module_score$violin_plot)
+  }
+)
+
+output$download_add_module_score_violin_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-violin-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = add_module_score$violin_plot, device = "pdf")
+  }
+)
+
 output$selected_cell_type_strna_violin_wrapper <- renderUI({
   if (!is.null(global_data$marker) && !is.null(global_data$stRNA)) {
     tagList(
+      fluidRow(
+        downloadBttn(
+          outputId = "download_add_module_score_violin_plot_png",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_add_module_score_violin_plot_pdf",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
       plotOutput("selected_cell_type_strna_violin"),
       bs4Callout(
         title = "",
@@ -93,9 +128,38 @@ output$selected_cell_type_strna_violin_wrapper <- renderUI({
   }
 })
 
+output$download_add_module_score_feature_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-violin-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = add_module_score$feature_plot)
+  }
+)
+
+output$download_add_module_score_feature_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-violin-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = add_module_score$feature_plot, device = "pdf")
+  }
+)
+
 output$selected_cell_type_strna_featureplot_wrapper <- renderUI({
   if (!is.null(global_data$marker) && !is.null(global_data$stRNA)) {
     tagList(
+      fluidRow(
+        downloadBttn(
+          outputId = "download_add_module_score_feature_plot_png",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_add_module_score_feature_plot_pdf",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
       plotOutput("selected_cell_type_strna_featureplot"),
       bs4Callout(
         title = "",
@@ -139,7 +203,7 @@ observeEvent(input$selected_cell_type_scrna, {
     )
 
     output$selected_cell_type_scrna_violin <- renderPlot({
-      ggviolin(
+      p <- ggviolin(
         data = scRNA@meta.data,
         x = "cell_type",
         y = "ST_cluster1",
@@ -154,6 +218,9 @@ observeEvent(input$selected_cell_type_scrna, {
           ),
           legend.position = "none"
         )
+
+      add_module_score$cell_type_violin_plot <- p
+      p
     })
 
     output$selected_cell_type_scrna_featureplot <- renderPlot({
@@ -175,7 +242,7 @@ observeEvent(input$selected_cell_type_scrna, {
       scRNA <- RunUMAP(scRNA, dims = pc.num)
 
       closeSweetAlert(session = session)
-      FeaturePlot(
+      p <- FeaturePlot(
         scRNA,
         features = "ST_cluster1",
         label = TRUE
@@ -183,13 +250,44 @@ observeEvent(input$selected_cell_type_scrna, {
         labs(
           title = paste0("ST_cluster", input$selected_cell_type_scrna)
         )
+      add_module_score$cell_type_feature_plot <- p
+      p
     })
   }
 })
 
+output$download_add_module_score_cell_type_violin_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-cell-type-violin-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = add_module_score$cell_type_violin_plot)
+  }
+)
+
+output$download_add_module_score_cell_type_violin_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-cell-type-violin-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = add_module_score$cell_type_violin_plot, device = "pdf")
+  }
+)
+
 output$selected_cell_type_scrna_violin_wrapper <- renderUI({
   if (!is.null(global_data$st_marker) && !is.null(global_data$scRNA_filter_1)) {
     tagList(
+      fluidRow(
+        downloadBttn(
+          outputId = "download_add_module_score_cell_type_violin_plot_png",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_add_module_score_cell_type_violin_plot_pdf",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
       plotOutput("selected_cell_type_scrna_violin"),
       bs4Callout(
         title = "",
@@ -201,9 +299,38 @@ output$selected_cell_type_scrna_violin_wrapper <- renderUI({
   }
 })
 
+output$download_add_module_score_cell_type_feature_plot_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-cell-type-feature-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = add_module_score$cell_type_feature_plot)
+  }
+)
+
+output$download_add_module_score_cell_type_feature_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-cell-type-feature-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = add_module_score$cell_type_feature_plot, device = "pdf")
+  }
+)
+
 output$selected_cell_type_scrna_featureplot_wrapper <- renderUI({
   if (!is.null(global_data$st_marker) && !is.null(global_data$scRNA_filter_1)) {
     tagList(
+      fluidRow(
+        downloadBttn(
+          outputId = "download_add_module_score_cell_type_feature_plot_png",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_add_module_score_cell_type_feature_plot_pdf",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
       plotOutput("selected_cell_type_scrna_featureplot"),
       bs4Callout(
         title = "",
@@ -227,15 +354,49 @@ output$add_module_score_1 <-
       )
 
       stRNA@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
-      DimPlot(stRNA) +
+      p <- DimPlot(stRNA) +
         xlab("ST1") +
         ylab("ST2")
+      add_module_score$cluster_result_plot <- p
+      p
     }
   })
+
+output$download_cluster_result_plot_png_1 <-
+  output$download_cluster_result_plot_png_2 <- downloadHandler(
+    filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-cluster-result-plot.png"),
+    content = function(file) {
+      ggsave(file, plot = add_module_score$cluster_result_plot)
+    }
+  )
+
+output$download_cluster_result_plot_pdf_1 <-
+  output$download_cluster_result_plot_pdf_2 <- downloadHandler(
+    filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-add-module-score-cluster-result-plot.pdf"),
+    content = function(file) {
+      ggsave(file, plot = add_module_score$cluster_result_plot, device = "pdf")
+    }
+  )
+
 
 output$add_module_score_1_wrapper <- renderUI({
   if (!is.null(global_data$stRNA) && !is.null(global_data$position_sub_sub)) {
     tagList(
+      fluidRow(
+        downloadBttn(
+          outputId = "download_cluster_result_plot_png_1",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_cluster_result_plot_pdf_1",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
       plotOutput("add_module_score_1"),
       bs4Callout(
         title = "",
@@ -251,6 +412,21 @@ output$add_module_score_1_wrapper <- renderUI({
 output$add_module_score_2_wrapper <- renderUI({
   if (!is.null(global_data$stRNA) && !is.null(global_data$position_sub_sub)) {
     tagList(
+      fluidRow(
+        downloadBttn(
+          outputId = "download_cluster_result_plot_png_2",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_cluster_result_plot_pdf_2",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
       plotOutput("add_module_score_2"),
       bs4Callout(
         title = "",
