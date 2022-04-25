@@ -107,17 +107,49 @@ observeEvent(input$run_gsva, {
   }
 })
 
+ssGSEA_result <- reactiveValues()
+
 observeEvent(input$selected_cell_type_gsva, {
   output$selected_cell_type_gsea_featureplot <- renderPlot({
     stRNA <- global_data$gsva_stRNA
 
-    FeaturePlot(stRNA, features = input$selected_cell_type_gsva)
+    p <- FeaturePlot(stRNA, features = input$selected_cell_type_gsva)
+    ssGSEA_result$feature_plot <- p
+    p
   })
 })
+
+output$download_ssGSEA_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-mia-feature-plot.png"),
+  content = function(file) {
+    ggsave(file, plot = ssGSEA_result$feature_plot)
+  }
+)
+output$download_ssGSEA_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-mia-feature-plot.pdf"),
+  content = function(file) {
+    ggsave(file, plot = ssGSEA_result$feature_plot, device = "pdf")
+  }
+)
 
 output$selected_cell_type_gsea_featureplot_wrapper <- renderUI({
   if (!is.null(global_data$marker) && global_data$gsva_done) {
     tagList(
+      fluidRow(
+        downloadBttn(
+          outputId = "download_ssGSEA_png",
+          label = "PNG",
+          size = "sm",
+          style = "fill"
+        ),
+        HTML("&nbsp;"),
+        downloadBttn(
+          outputId = "download_ssGSEA_pdf",
+          label = "PDF",
+          size = "sm",
+          style = "fill"
+        ),
+      ),
       plotOutput("selected_cell_type_gsea_featureplot"),
       bs4Callout(
         title = "",
