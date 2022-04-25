@@ -17,6 +17,8 @@ output$run_mia <- renderUI({
   }
 })
 
+mia_result <- reactiveValues()
+
 observeEvent(input$run_mia, {
   if (!is.null(global_data$marker) && !is.null(global_data$st_marker)) {
     sc.marker <- global_data$marker
@@ -77,7 +79,7 @@ observeEvent(input$run_mia, {
     p.data <- as_tibble(p.data)
 
     output$mia_heatmap <- renderPlot({
-      p.data %>%
+      heatmap_result <- p.data %>%
         tidyHeatmap::heatmap(
           .column = st,
           .row = sc,
@@ -92,6 +94,9 @@ observeEvent(input$run_mia, {
           cluster_columns = FALSE
         ) %>%
         add_tile(group)
+
+      mia_result$heatmap_plot <- heatmap_result
+      heatmap_result
     })
 
     closeSweetAlert(session = session)
@@ -109,23 +114,69 @@ observeEvent(input$run_mia, {
     stRNA@reductions$umap@cell.embeddings <- as.matrix(embed_umap2)
 
     output$mia_dimplot <- renderPlot({
-      DimPlot(stRNA) +
+      p <- DimPlot(stRNA) +
         xlab("ST1") +
         ylab("ST2")
+      mia_result$clustering <- p
+      p
     })
   }
 })
+
+output$download_mia_heatmap_plot_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-mia-heatmap.pdf"),
+  content = function(file) {
+    save_pdf(mia_result$heatmap_plot, file)
+  }
+)
+
+output$download_mia_clustering_png <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-mia-clustering.png"),
+  content = function(file) {
+    ggsave(file, plot = mia_result$clustering)
+  }
+)
+
+output$download_mia_clustering_pdf <- downloadHandler(
+  filename = paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), "-mia-clustering.pdf"),
+  content = function(file) {
+    ggsave(file, plot = mia_result$clustering, device = "pdf")
+  }
+)
 
 observeEvent(input$run_mia, {
   output$mia_plot_wrapper <- renderUI({
     if (!is.null(global_data$stRNA) && !is.null(global_data$position_sub_sub)) {
       tagList(
+        fluidRow(
+          downloadBttn(
+            outputId = "download_mia_heatmap_plot_pdf",
+            label = "PDF",
+            size = "sm",
+            style = "fill"
+          ),
+        ),
         plotOutput("mia_heatmap"),
         bs4Callout(
           title = "",
           width = 12,
           status = "info",
           "The heatmap shows the gene expression for each cell type in each spatial cluster."
+        ),
+        fluidRow(
+          downloadBttn(
+            outputId = "download_mia_clustering_png",
+            label = "PNG",
+            size = "sm",
+            style = "fill"
+          ),
+          HTML("&nbsp;"),
+          downloadBttn(
+            outputId = "download_mia_clustering_pdf",
+            label = "PDF",
+            size = "sm",
+            style = "fill"
+          ),
         ),
         plotOutput("mia_dimplot"),
         bs4Callout(
