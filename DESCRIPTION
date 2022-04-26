@@ -1,11 +1,16 @@
 Package: webSCST
-Version: 0.0.0.9000
-Title: What the Package Does (One Line, Title Case)
-Description: a web tool for single-cell RNA-seq data and spatial transcriptome data integration.
+Version: 1.0.0
+Title: Web Tool for Single-cell RNA-seq Data and Spatial Transcriptome Data Integration.
+Description: A web tool for single-cell RNA-seq data and spatial transcriptome data integration.
 Authors@R:
-    c(person(given = "Wei",
+    c(person(given = "Zilong",
+        family = "Zhang",
+        role = c("aut"),
+        email = "zhangzilong@bi.a.u-tokyo.ac.jp"
+      ),
+      person(given = "Wei",
         family = "Su",
-        role = c("aut", "cre"),
+        role = c("cre"),
         email = "swsoyee@gmail.com",
         comment = c(ORCID = "0000-0002-9302-5332")
       ))
