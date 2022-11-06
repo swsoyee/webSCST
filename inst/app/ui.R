@@ -84,6 +84,10 @@ shinyUI(
         tags$a(
           href = "https://en.uestc.edu.cn/",
           " UESTC."
+        ),
+        tags$div(
+          "\u8700ICP\u59072021025529\u53f7-2",
+          style = "text-align: center;"
         )
       )
     )
